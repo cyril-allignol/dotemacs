@@ -50,7 +50,7 @@
  '(current-language-environment "UTF-8")
  '(custom-safe-themes
    (quote
-    ("4182c491b5cc235ba5f27d3c1804fc9f11f51bf56fb6d961f94788be034179ad" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+    ("6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "4182c491b5cc235ba5f27d3c1804fc9f11f51bf56fb6d961f94788be034179ad" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(fci-rule-color "#ECEFF1")
  '(hl-sexp-background-color "#efebe9")
  '(jdee-db-active-breakpoint-face-colors (cons "#1B2229" "#51afef"))
@@ -162,7 +162,8 @@
 ;; disable other themes before loading new one
 (defadvice load-theme (before theme-dont-propagate activate)
   "Disable theme before loading new one."
-  (mapcar #'disable-theme custom-enabled-themes))
+  ;(mapcar #'disable-theme custom-enabled-themes))
+  (mapc #'disable-theme custom-enabled-themes))
 
 (defun my/next-theme (theme)
   (if (eq theme 'default)
@@ -288,6 +289,52 @@
   :init
   (add-hook 'coq-mode-hook #'company-coq-mode))
 
+(setq coq-symbols-list
+      '(lambda ()
+         (mapc (lambda (pair) (push pair prettify-symbols-alist))
+               '(("~" . ?¬) ("empty" . ?Ø) ("*" . ?×) ("\\in" . ?\u220A)
+                 ("~exists" . ?\u2204)
+                 ("Qed." . ?■) ("Defined." . ?□)
+                 ("==>*" . (?\u27F9 (Br . Bl) ?*))
+                 ("=?" . ?\u225F) ("<=?" . (?\u2264 (Br . Bl) ??))
+                 ("[|" . ?\u27E6) ("|]" . ?\u27E7) ("\\|" . ?\u21D3)
+                 ("|]\\|" . (?\u27E7 (Br . Bl) ?\u21D3))
+                 ("\\(" . ?\u27E8) ("\\)" . ?\u27E9)
+                 ("\\:" . ?\u2236) ("|=" . ?\u22A7)
+                 ("Gamma'" . (?Γ (Br . Bl) ?'))
+                 ("Gamma''" . (?Γ (Br . Bl) ?' (Br . Bl) ?'))
+                 ("Gamma0" . (?Γ (Br . Bl) ?0))
+                 ("Gamma1" . (?Γ (Br . Bl) ?1))
+                 ("Gamma2" . (?Γ (Br . Bl) ?2))
+                 ("sigma'" . (?σ (Br . Bl) ?'))
+                 ("sigma''" . (?σ (Br . Bl) ?' (Br . Bl) ?'))
+                 ("sigma0" . (?σ (Br . Bl) ?0))
+                 ("sigma1" . (?σ (Br . Bl) ?1))
+                 ("sigma2" . (?σ (Br . Bl) ?2))
+                 ;; same as other capital letters -> confusing
+                 ;; ("Alpha" . ?Α) ("Beta" . ?Β) ("Epsilon" . ?Ε) ("Zeta" . ?Ζ)
+                 ;; ("Eta" . ?Η) ("Iota" . ?Ι) ("Kappa" . ?Κ) ("Mu" . ?Μ)
+                 ;; ("Nu" . ?Ν) ("Omicron" . ?Ο) ("Rho" . ?Ρ) ("Tau" . ?Τ)
+                 ;; ("Upsilon" . ?Υ) ("Chi" . ?Χ)
+                 ;; OK
+                 ("Gamma" . ?Γ) ("Delta" . ?Δ) ("Theta" . ?Θ) ("Lambda" . ?Λ)
+                 ("Xi" . ?Ξ) ("Pi" . ?Π) ("Sigma" . ?Σ) ("Phi" . ?Φ)
+                 ("Psi" . ?Ψ) ("Omega" . ?Ω)
+                 ("alpha" . ?α) ("beta" . ?β) ("gamma" . ?γ)
+                 ("delta" . ?δ) ("epsilon" . ?ε) ("zeta" . ?ζ)
+                 ("eta" . ?η) ("theta" . ?θ) ("iota" . ?ι)
+                 ("kappa" . ?κ) ("mu" . ?μ)
+                 ("nu" . ?ν) ("xi" . ?ξ) ("omicron" . ?ο)
+                 ("pi" . ?π) ("rho" . ?ρ) ("sigma" . ?σ)
+                 ("tau" . ?τ) ("upsilon" . ?υ) ("phi" . ?φ)
+                 ("chi" . ?χ) ("psi" . ?ψ)
+                 ;; also confusing?
+                 ("lambda" . ?λ) ("omega" . ?ω)
+                 ))))
+
+(add-hook 'coq-mode-hook coq-symbols-list)
+(add-hook 'coq-goals-mode-hook coq-symbols-list)
+
 ;;=======================================
 ;;               Mode Caml
 ;;=======================================
@@ -388,7 +435,17 @@
           (sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED")
           (sequence "|" "CANCELED")))
   (setq org-enforce-todo-dependencies t)
-  (setq org-log-done 'time))
+  (setq org-log-done 'time)
+  (setq org-src-fontify-natively t)
+  )
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . nil)
+   (ocaml . t)
+   (python . t)
+   (R . t)))
+(setq org-babel-python-command "python3")
 
 ;;=======================================
 ;;             DIFF MODE
