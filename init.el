@@ -289,7 +289,11 @@
 ;;                 Coq
 ;;=======================================
 ;; Open .v files with Proof General's Coq mode
-(load "~/.emacs.d/lisp/PG/generic/proof-site")
+(add-hook 'LaTeX-mode-hook
+          (lambda ()
+            (load "~/.emacs.d/lisp/PG/generic/proof-site")
+            )
+          )
 ;; Load company-coq when opening Coq files
 (use-package company-coq
   :init
