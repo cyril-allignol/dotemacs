@@ -1,4 +1,4 @@
-;;=======================================
+;=======================================
 ;;               EMACS PATH
 ;;=======================================
 (setq gc-cons-threshold 100000000)
@@ -25,12 +25,13 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(setq use-package-always-ensure t)
+
 (eval-when-compile
   (require 'use-package))
 
 (use-package diminish
-  :defer t
-  :ensure t)
+  :defer t)
 ;; (require 'bind-key)
 
 ;;=======================================
@@ -118,18 +119,15 @@
 (setq inhibit-startup-echo-area-message "")
 
 (use-package all-the-icons
-  :defer t
-  :ensure t)
+  :defer t)
 
 (use-package neotree
   :defer t
-  :ensure t
   :bind ([f3] . neotree-toggle)
   :config
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
 
 (use-package smart-mode-line
-  :ensure t
   :init
   (setq sml/mode-width "full"
         sml/name-width 40)
@@ -232,7 +230,6 @@
 ;;=======================================
 (use-package auto-complete
   :defer t
-  :ensure t
   :init (setq ac-auto-start nil)
   :bind (:map ac-mode-map ("<C-tab>" . auto-complete)))
 
@@ -241,7 +238,6 @@
 ;;=======================================
 (use-package multiple-cursors
   :defer t
-  :ensure t
   :bind (("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
          ("C-* C-*" . mc/mark-all-like-this)
@@ -253,7 +249,6 @@
 ;                HISTORIQUE
 ;;=======================================
 (use-package savehist
-  :ensure t
   :init
   (setq savehist-file "~/.emacs-history")
   (setq savehist-length 1000)
@@ -263,18 +258,27 @@
 ;;=======================================
 ;;                LaTeX
 ;;=======================================
-(use-package tex
+(use-package latex
+  :mode ("\\.tex\\'" . latex-mode)
   :defer t
   :ensure auctex
   :config
-  (setq TeX-PDF-mode t)
   (setq TeX-parse-self t) ; Enable parse on load.
   (setq TeX-auto-save t) ; Enable parse on save.
+  (setq-default TeX-clean-confirm nil)
+  (setq-default TeX-master nil) ; in newer versions: dwim
+  (add-hook 'LaTeX-mode-hook
+            (lambda ()
+              (setq TeX-PDF-mode t)
+              (turn-on-reftex)
+              (company-mode)
+              (setq TeX-error-overview-open-after-TeX-run t)
+              )
+            )
   )
 
 (use-package reftex
   :defer t
-  :ensure t
   :init
   (setq reftex-plug-into-AUCTeX t)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
@@ -349,7 +353,6 @@
 
 (use-package utop
   :defer t
-  :ensure t
   :init
   (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
   (add-hook 'tuareg-mode-hook 'utop-minor-mode)
@@ -357,18 +360,15 @@
 
 (use-package tuareg
   :defer t
-  :ensure t
   ;; :config
   ;; (setq tuareg-prettify-symbol-mode t)
   )
 
 (use-package ocp-indent
-  :defer t
-  :ensure t)
+  :defer t)
 
 (use-package merlin
   :defer t
-  :ensure t
   :init
   (add-hook 'tuareg-mode-hook 'merlin-mode t)
   (add-hook 'tuareg-mode-hook 'auto-complete-mode t)
@@ -377,7 +377,7 @@
   (setq merlin-command 'opam))
 
 (setq auto-mode-alist (cons '("\\.ml[iylp]?" . tuareg-mode) auto-mode-alist))
-(use-package caml-font :defer t)
+(use-package caml-font :defer t :ensure nil)
 
 ;; Choose modes for related config. files
 (setq auto-mode-alist
@@ -428,7 +428,6 @@
 ;;=======================================
 (use-package org
   :defer t
-  :ensure t
   :init
   (setq org-todo-keywords
         '((sequence "TODO" "STARTED" "|" "DONE")
@@ -446,13 +445,13 @@
    (python . t)
    (R . t)))
 (setq org-babel-python-command "python3")
+(setq org-confirm-babel-evaluate nil)
 
 ;;=======================================
 ;;             DIFF MODE
 ;;=======================================
 (use-package diff-hl
   :defer t
-  :ensure t
   :config
   (global-diff-hl-mode +1))
 
@@ -461,14 +460,13 @@
 ;;=======================================
 (use-package magit
   :defer t
-  :ensure t
   :bind
   ("C-x g" . magit-status))
 
 ;;=======================================
 ;;              HELM
 ;;=======================================
-(use-package helm :ensure t)
+; (use-package helm))
 (use-package helm-config
   :ensure helm
   :bind
