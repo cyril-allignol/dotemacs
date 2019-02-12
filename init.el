@@ -272,6 +272,8 @@
               (setq TeX-PDF-mode t)
               (turn-on-reftex)
               (company-mode)
+              (setq TeX-debug-bad-boxes t)
+              (setq TeX-debug-warnings t)
               (setq TeX-error-overview-open-after-TeX-run t)
               )
             )
