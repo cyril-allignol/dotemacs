@@ -296,6 +296,7 @@
           )
 ;; Load company-coq when opening Coq files
 (use-package company-coq
+  :defer t
   :init
   (add-hook 'coq-mode-hook #'company-coq-mode)
   :config
