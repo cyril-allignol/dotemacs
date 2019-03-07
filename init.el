@@ -100,12 +100,11 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Backup file settings
-(setq
-   backup-by-copying t      ; don't clobber symlinks
-   delete-old-versions t
-   kept-new-versions 6
-   kept-old-versions 2
-   version-control t)       ; use versioned backups
+(setq backup-by-copying t      ; don't clobber symlinks
+      delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)       ; use versioned backups
 ;; Save by default in ~/.saves folder
 (push (cons "." "~/.saves") backup-directory-alist)
 
@@ -114,9 +113,9 @@
 ;;=======================================
 (blink-cursor-mode 0)
 (menu-bar-mode 0)
-(setq initial-scratch-message "")
-(setq inhibit-startup-message t)
-(setq inhibit-startup-echo-area-message "")
+(setq initial-scratch-message ""
+      inhibit-startup-message t
+      inhibit-startup-echo-area-message "")
 
 (use-package all-the-icons
   :defer t)
@@ -289,7 +288,7 @@
 ;;                 Coq
 ;;=======================================
 ;; Open .v files with Proof General's Coq mode
-(add-hook 'LaTeX-mode-hook
+(add-hook 'coq-mode-hook
           (lambda ()
             (load "~/.emacs.d/lisp/PG/generic/proof-site")
             )
