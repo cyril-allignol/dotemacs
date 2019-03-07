@@ -112,6 +112,7 @@
 ;;             APPEARANCE
 ;;=======================================
 (blink-cursor-mode 0)
+(global-hl-line-mode t)
 (menu-bar-mode 0)
 (setq initial-scratch-message ""
       inhibit-startup-message t
