@@ -7,8 +7,6 @@
   (normal-top-level-add-subdirs-to-load-path))
 ;(setq explicit-bash-args '("--login" "-i"))
 
-(server-start)
-
 (require 'local nil t)
 
 ;;=======================================
@@ -30,69 +28,21 @@
 (eval-when-compile
   (require 'use-package))
 
-(use-package diminish
-  :defer t)
-;; (require 'bind-key)
-
 ;;=======================================
 ;;              GLOBAL FLAGS
 ;;=======================================
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   (vector "#212121" "#B71C1C" "#558b2f" "#FFA000" "#2196f3" "#4527A0" "#00796b" "#FAFAFA"))
- '(blink-cursor-mode nil)
- '(column-number-mode t)
- '(current-language-environment "UTF-8")
- '(custom-safe-themes
-   (quote
-    ("6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "4182c491b5cc235ba5f27d3c1804fc9f11f51bf56fb6d961f94788be034179ad" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
- '(fci-rule-color "#ECEFF1")
- '(hl-sexp-background-color "#efebe9")
- '(jdee-db-active-breakpoint-face-colors (cons "#1B2229" "#51afef"))
- '(jdee-db-requested-breakpoint-face-colors (cons "#1B2229" "#98be65"))
- '(jdee-db-spec-breakpoint-face-colors (cons "#1B2229" "#3f444a"))
- '(lpr-command "lpr -P lfsb")
- '(magit-diff-use-overlays nil)
- '(org-fontify-done-headline t)
- '(org-fontify-quote-and-verse-blocks t)
- '(org-fontify-whole-heading-line t)
- '(scroll-bar-mode nil)
- '(show-paren-mode t)
- '(tool-bar-mode nil)
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#B71C1C")
-     (40 . "#FF5722")
-     (60 . "#FFA000")
-     (80 . "#558b2f")
-     (100 . "#00796b")
-     (120 . "#2196f3")
-     (140 . "#4527A0")
-     (160 . "#B71C1C")
-     (180 . "#FF5722")
-     (200 . "#FFA000")
-     (220 . "#558b2f")
-     (240 . "#00796b")
-     (260 . "#2196f3")
-     (280 . "#4527A0")
-     (300 . "#B71C1C")
-     (320 . "#FF5722")
-     (340 . "#FFA000")
-     (360 . "#558b2f"))))
- '(vc-annotate-very-old-color nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 98 :width normal)))))
+;; Start server only for main graphical Emacs
+(use-package edit-server
+  :if window-system
+  :init
+  (add-hook 'after-init-hook 'server-start t)
+  (add-hook 'after-init-hook 'edit-server-start t))
+
+(use-package diminish
+  :defer t)
+
+(setq custom-file (concat user-emacs-directory "/custom.el"))
+(load-file custom-file)
 
 (add-to-list 'default-frame-alist '(width . 81))
 
@@ -114,6 +64,10 @@
 (blink-cursor-mode 0)
 (global-hl-line-mode t)
 (menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+(show-paren-mode t)
+(column-number-mode t)
 (setq initial-scratch-message ""
       inhibit-startup-message t
       inhibit-startup-echo-area-message "")
