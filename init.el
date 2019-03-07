@@ -1,11 +1,24 @@
-;=======================================
+;;=======================================
+;; Startup process adapted from:
+;; https://github.com/jwiegley/dot-emacs/blob/master/init.el
+;;=======================================
+(setq package-enable-at-startup nil
+      message-log-max 16384
+      gc-cons-threshold 402653184
+      gc-cons-percentage 0.6)
+
+(add-hook 'after-init-hook
+          `(lambda ()
+             (setq gc-cons-threshold 800000
+                   gc-cons-percentage 0.1)
+             (garbage-collect)) t)
+
+;;=======================================
 ;;               EMACS PATH
 ;;=======================================
-(setq gc-cons-threshold 100000000)
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
 (let ((default-directory  "~/.emacs.d/"))
   (normal-top-level-add-subdirs-to-load-path))
-;(setq explicit-bash-args '("--login" "-i"))
 
 (require 'local nil t)
 
@@ -162,9 +175,6 @@
 ;;=======================================
 ;;                  KEYS
 ;;=======================================
-;; (define-key global-map [f1]   'undo)
-;; (define-key global-map [f2]   'vc-toggle-read-only)
-;; (define-key global-map [f3]   'iso-accents-mode)
 (define-key global-map [f4]  'goto-char)
 (define-key global-map [f5]  'goto-line)
 (define-key global-map [f6]  'compile)
@@ -344,7 +354,6 @@
 ;;=======================================
 ;;              Mode texte
 ;;=======================================
-;(setq default-justification 'left))
 (add-hook 'text-mode-hook
           (lambda ()
             (auto-fill-mode t)
