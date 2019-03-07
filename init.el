@@ -289,16 +289,16 @@
 ;;=======================================
 ;;                 Coq
 ;;=======================================
-;; Open .v files with Proof General's Coq mode
-(add-hook 'coq-mode-hook
-          (lambda ()
-            (load "~/.emacs.d/lisp/PG/generic/proof-site")
-            )
-          )
 ;; Load company-coq when opening Coq files
 (use-package company-coq
   :defer t
+  :mode ("\\.v\\'" . coq-mode) ;; Open .v files with Proof General's Coq mode
   :init
+  (add-hook 'coq-mode-hook
+            (lambda ()
+              (load "~/.emacs.d/lisp/PG/generic/proof-site")
+              )
+            )
   (add-hook 'coq-mode-hook #'company-coq-mode)
   :config
   (setq coq-symbols-list
