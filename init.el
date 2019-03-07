@@ -206,7 +206,7 @@
   (setq savehist-file "~/.emacs-history")
   (setq savehist-length 1000)
   :config
-  (savehist-load))
+  (savehist-mode +1))
 
 ;;=======================================
 ;;                LaTeX
@@ -437,7 +437,7 @@
    ("C-z" . helm-select-action))
   :config
   (global-unset-key (kbd "C-x c"))
-  (setq helm-split-window-in-side-p t
+  (setq helm-split-window-inside-p t
         helm-move-to-line-cycle-in-source t
         helm-ff-search-library-in-sexp t
         helm-scroll-amount 8
