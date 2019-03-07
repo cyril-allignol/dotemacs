@@ -214,7 +214,6 @@
 (define-key global-map [f4]  'goto-char)
 (define-key global-map [f5]  'goto-line)
 (define-key global-map [f6]  'compile)
-(define-key global-map [f7]  'camldebug)
 (define-key global-map [f8]  'next-error)
 (define-key global-map [shift f8]  'previous-error)
 (define-key global-map [f10] 'my/toggle-theme)
@@ -350,49 +349,43 @@
 ;;=======================================
 ;;               Mode Caml
 ;;=======================================
-;; Setup environment variables using opam
-(dolist
-   (var (car (read-from-string
-           (shell-command-to-string "opam config env --sexp"))))
- (setenv (car var) (cadr var)))
-(setq exec-path (split-string (getenv "PATH") path-separator))
-(push (concat (getenv "OCAML_TOPLEVEL_PATH")
-          "/../../share/emacs/site-lisp") load-path)
-
 (use-package utop
   :defer t
+  :hook (tuareg-mode . utop-minor-mode)
   :init
   (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
-  (add-hook 'tuareg-mode-hook 'utop-minor-mode)
   (setq utop-command "opam config exec -- utop -emacs"))
 
-(use-package tuareg
+(use-package tuareg-mode
   :defer t
+  :ensure tuareg
+  :mode "\\.ml[iylp]?"
+  :mode
+  (("_oasis\\'" . conf-mode)
+   ("_tags\\'" . conf-mode)
+   ("_log\\'" . conf-mode))
+  :init
+  ;; Setup environment variables using opam
+  (dolist
+      (var (car (read-from-string
+                 (shell-command-to-string "opam config env --sexp"))))
+    (setenv (car var) (cadr var)))
+  (setq exec-path (split-string (getenv "PATH") path-separator))
+  (push (concat (getenv "OCAML_TOPLEVEL_PATH")
+                "/../../share/emacs/site-lisp") load-path)
   ;; :config
   ;; (setq tuareg-prettify-symbol-mode t)
   )
 
-(use-package ocp-indent
-  :defer t)
-
-(use-package merlin
+(use-package merlin-mode
   :defer t
+  :ensure merlin
+  :hook tuareg-mode
   :init
-  (add-hook 'tuareg-mode-hook 'merlin-mode t)
   (add-hook 'tuareg-mode-hook 'auto-complete-mode t)
   (setq merlin-use-auto-complete-mode 'easy)
   (setq merlin-ac-setup 'easy)
   (setq merlin-command 'opam))
-
-(setq auto-mode-alist (cons '("\\.ml[iylp]?" . tuareg-mode) auto-mode-alist))
-(use-package caml-font :defer t :ensure nil)
-
-;; Choose modes for related config. files
-(setq auto-mode-alist
-      (append '(("_oasis\\'" . conf-mode)
-		("_tags\\'" . conf-mode)
-		("_log\\'" . conf-mode))
-              auto-mode-alist))
 
 ;;=======================================
 ;;              Mode texte
