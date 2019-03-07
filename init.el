@@ -259,14 +259,11 @@
 ;;                LaTeX
 ;;=======================================
 (use-package latex
-  :mode ("\\.tex\\'" . latex-mode)
   :defer t
   :ensure auctex
-  :config
-  (setq TeX-parse-self t) ; Enable parse on load.
-  (setq TeX-auto-save t) ; Enable parse on save.
-  (setq-default TeX-clean-confirm nil)
-  (setq-default TeX-master nil) ; in newer versions: dwim
+  :mode ("\\.tex\\'" . latex-mode)
+  :bind (:map LaTeX-mode-map ("C-c l" . TeX-error-overview))
+  :init
   (add-hook 'LaTeX-mode-hook
             (lambda ()
               (setq TeX-PDF-mode t)
@@ -274,9 +271,13 @@
               (company-mode)
               (setq TeX-debug-bad-boxes t)
               (setq TeX-debug-warnings t)
-              (setq TeX-error-overview-open-after-TeX-run t)
               )
             )
+  :config
+  (setq TeX-parse-self t) ; Enable parse on load.
+  (setq TeX-auto-save t) ; Enable parse on save.
+  (setq-default TeX-clean-confirm nil)
+  (setq-default TeX-master nil) ; in newer versions: dwim
   )
 
 (use-package reftex
