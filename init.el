@@ -158,6 +158,19 @@
 (define-key global-map (kbd "C-x C-b") 'electric-buffer-list)
 
 ;;=======================================
+;;             UNDOING
+;;=======================================
+(use-package undo-tree
+  :ensure t
+  :diminish undo-tree-mode
+  :bind* (("C-x u" . undo-tree-undo)
+          ("C-_" . undo-tree-undo)
+          ("M-m r" . undo-tree-redo)
+          ("M-m U" . undo-tree-visualize))
+  :config
+  (global-undo-tree-mode 1))
+
+;;=======================================
 ;;           AUTO-COMPLETION
 ;;=======================================
 (use-package auto-complete
