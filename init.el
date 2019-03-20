@@ -89,6 +89,7 @@
 (use-package doom-themes
   :ensure t
   :config
+  (doom-themes-org-config)
   ;; Theme cycling
   ;; taken from:
   ;; https://github.com/habamax/.emacs.d/blob/master/lisp/haba-appearance.el
@@ -116,13 +117,19 @@
 (use-package doom-modeline
   :ensure t
   :hook (after-init . doom-modeline-mode)
-  :init (setq doom-modeline-major-mode-color-icon t)
+  :init
+  (setq doom-modeline-buffer-file-name-style 'truncate-upto-root
+        doom-modeline-icon t
+        doom-modeline-major-mode-icon t
+        doom-modeline-major-mode-color-icon t)
   )
 
 (use-package neotree
   :ensure t
   :bind ([f3] . neotree-toggle)
-  :config (doom-themes-neotree-config)
+  :config
+  (doom-themes-neotree-config)
+  (setq neo-smart-open t)
   )
 
 (setq scroll-margin 3
