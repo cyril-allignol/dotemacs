@@ -233,6 +233,13 @@
   (setq reftex-plug-into-AUCTeX t)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
 
+(use-package writegood-mode
+  :ensure t
+  :bind
+  ("C-c g"     . writegood-mode)
+  ("C-c C-g g" . writegood-grade-level)
+  ("C-c C-g e" . writegood-reading-ease))
+
 ;;=======================================
 ;;                 Coq
 ;;=======================================
