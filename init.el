@@ -121,7 +121,9 @@
   (setq doom-modeline-buffer-file-name-style 'truncate-upto-root
         doom-modeline-icon t
         doom-modeline-major-mode-icon t
-        doom-modeline-major-mode-color-icon t)
+        doom-modeline-major-mode-color-icon t
+        doom-modeline-env-python-executable "python3"
+        )
   )
 
 (use-package neotree
@@ -332,6 +334,15 @@
   (setq merlin-use-auto-complete-mode 'easy)
   (setq merlin-ac-setup 'easy)
   (setq merlin-command 'opam))
+
+;;=======================================
+;;              Mode Python
+;;=======================================
+(use-package python
+  :ensure t
+  :mode ("\\.py\\'" . python-mode)
+  :config
+  (setq python-shell-interpreter "python3"))
 
 ;;=======================================
 ;;              Mode texte
