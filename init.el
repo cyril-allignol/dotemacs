@@ -51,7 +51,7 @@
   (add-hook 'after-init-hook 'server-start t)
   (add-hook 'after-init-hook 'edit-server-start t))
 
-(use-package diminish :ensure t)
+(use-package diminish)
 
 (setq custom-file (concat user-emacs-directory "/custom.el"))
 (load-file custom-file)
@@ -84,10 +84,9 @@
       inhibit-startup-message t
       inhibit-startup-echo-area-message "")
 
-(use-package all-the-icons :ensure t)
+(use-package all-the-icons)
 
 (use-package doom-themes
-  :ensure t
   :config
   (doom-themes-org-config)
   ;; Theme cycling
@@ -115,7 +114,6 @@
   )
 
 (use-package doom-modeline
-  :ensure t
   :hook (after-init . doom-modeline-mode)
   :init
   (setq doom-modeline-buffer-file-name-style 'truncate-upto-root
@@ -127,7 +125,6 @@
   )
 
 (use-package neotree
-  :ensure t
   :bind ([f3] . neotree-toggle)
   :config
   (doom-themes-neotree-config)
@@ -163,7 +160,6 @@
 ;;             UNDOING
 ;;=======================================
 (use-package undo-tree
-  :ensure t
   :diminish undo-tree-mode
   :bind* (("C-x u" . undo-tree-undo)
           ("C-_" . undo-tree-undo)
@@ -240,7 +236,6 @@
 (setq ispell-program-name "aspell")
 
 (use-package writegood-mode
-  :ensure t
   :bind
   ("C-c g"     . writegood-mode)
   ("C-c C-g g" . writegood-grade-level)
@@ -352,7 +347,6 @@
 ;;              Mode Python
 ;;=======================================
 (use-package python
-  :ensure t
   :mode ("\\.py\\'" . python-mode)
   :config
   (setq python-shell-interpreter "python3"))
