@@ -225,6 +225,10 @@
   (setq TeX-auto-save t) ; Enable parse on save.
   (setq-default TeX-clean-confirm nil)
   (setq-default TeX-master nil) ; in newer versions: dwim
+  (add-hook 'TeX-language-fr-hook
+            (lambda () (ispell-change-dictionary "francais")))
+  (add-hook 'TeX-language-en-hook
+            (lambda () (ispell-change-dictionary "english")))
   )
 
 (use-package reftex
@@ -232,6 +236,8 @@
   :init
   (setq reftex-plug-into-AUCTeX t)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
+
+(setq ispell-program-name "aspell")
 
 (use-package writegood-mode
   :ensure t
