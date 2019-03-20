@@ -1,4 +1,5 @@
 local.el
+private.el
 custom.el
 recentf
 ac-comphist.dat

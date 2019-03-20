@@ -21,6 +21,7 @@
   (normal-top-level-add-subdirs-to-load-path))
 
 (require 'local nil t)
+(require 'private nil t)
 
 ;;=======================================
 ;;              PACKAGES
