@@ -51,8 +51,7 @@
   (add-hook 'after-init-hook 'server-start t)
   (add-hook 'after-init-hook 'edit-server-start t))
 
-(use-package diminish
-  :defer t)
+(use-package diminish :ensure t)
 
 (setq custom-file (concat user-emacs-directory "/custom.el"))
 (load-file custom-file)
@@ -85,83 +84,46 @@
       inhibit-startup-message t
       inhibit-startup-echo-area-message "")
 
-(use-package all-the-icons
-  :defer t)
+(use-package all-the-icons :ensure t)
 
-(use-package neotree
-  :defer t
-  :bind ([f3] . neotree-toggle)
+(use-package doom-themes
+  :ensure t
   :config
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
-
-(use-package smart-mode-line
-  :init
-  (setq sml/mode-width "full"
-        sml/name-width 40)
-  (rich-minority-mode 1)
-  (setf rm-blacklist "")
-  (setq sml/theme 'respectful)
-  (sml/setup)
-  :config
-  (setq sml/shorten-directory t
-        sml/shorten-modes t)
-  (add-to-list 'sml/replacer-regexp-list '("^~/python/" ":PY:") t)
-  (add-to-list 'sml/replacer-regexp-list '("^~/latex/" ":TeX:") t)
-  (add-to-list 'sml/replacer-regexp-list '("^~/ownCloud/partake" ":PTK:") t)
-  (add-to-list 'sml/replacer-regexp-list '("^~/ownCloud/" ":OC:") t)
+  ;; Theme cycling
+  ;; taken from:
+  ;; https://github.com/habamax/.emacs.d/blob/master/lisp/haba-appearance.el
+  (defvar *my-theme-light* 'doom-one-light)
+  (defvar *my-theme-dark* 'doom-one)
+  (defvar *my-current-theme* *my-theme-dark*)
+  (load-theme *my-theme-dark*)
+  ;; disable other themes before loading new one
+  (defadvice load-theme (before theme-dont-propagate activate)
+    "Disable theme before loading new one."
+    (mapc #'disable-theme custom-enabled-themes))
+  (defun my/next-theme (theme)
+    (if (eq theme 'default)
+        (disable-theme *my-current-theme*)
+      (progn
+        (load-theme theme t)))
+    (setq *my-current-theme* theme))
+  (defun my/toggle-theme ()
+    (interactive)
+    (cond
+     ((eq *my-current-theme* *my-theme-dark*) (my/next-theme *my-theme-light*))
+     ((eq *my-current-theme* *my-theme-light*) (my/next-theme *my-theme-dark*))))
   )
 
-;; Theme cycling
-;; taken from:
-;; https://github.com/habamax/.emacs.d/blob/master/lisp/haba-appearance.el
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode)
+  :init (setq doom-modeline-major-mode-color-icon t)
+  )
 
-;; (defvar *my-theme-dark* 'tango-dark)
-;;(defvar *my-theme-light* 'leuven)
-;; (defvar *my-theme-dark* 'material)
-(defvar *my-theme-light* 'material-light)
-(defvar *my-theme-dark* 'doom-one)
-(defvar *my-current-theme* *my-theme-dark*)
-
-(load-theme *my-theme-dark*)
-
-;; disable other themes before loading new one
-(defadvice load-theme (before theme-dont-propagate activate)
-  "Disable theme before loading new one."
-  ;(mapcar #'disable-theme custom-enabled-themes))
-  (mapc #'disable-theme custom-enabled-themes))
-
-(defun my/next-theme (theme)
-  (if (eq theme 'default)
-      (disable-theme *my-current-theme*)
-    (progn
-      (load-theme theme t)))
-  (setq *my-current-theme* theme))
-
-(defun my/toggle-theme ()
-  (interactive)
-  (cond
-   ((eq *my-current-theme* *my-theme-dark*) (my/next-theme *my-theme-light*))
-   ((eq *my-current-theme* *my-theme-light*) (my/next-theme *my-theme-dark*))))
-
-;; from: http://www.whiz.se/2016/05/01/dark-theme-in-emacs/
-;; (defun set-dark-wm-theme (frame)
-;;   (select-frame frame) ;; this is important!
-;;   (when (display-graphic-p)
-;;     (progn
-;;       (when (file-exists-p "/usr/bin/xprop")
-;;     (progn
-;;       (defvar winid nil)
-;;       (setq winid (frame-parameter frame 'outer-window-id))
-;;       (call-process "xprop" nil nil nil "-f" "_GTK_THEME_VARIANT" "8u" "-set" "_GTK_THEME_VARIANT" "dark" "-id" winid))))))
-
-;; (defun dark-frame ()
-;;   (interactive)
-;;   (set-dark-wm-theme (selected-frame))
-;;   (unless (display-graphic-p (selected-frame))
-;;     (set-face-background 'default "unspecified-bg" (selected-frame))))
-
-;; (add-hook 'window-setup-hook 'dark-frame)
-;; (add-hook 'after-make-frame-functions 'set-dark-wm-theme)
+(use-package neotree
+  :ensure t
+  :bind ([f3] . neotree-toggle)
+  :config (doom-themes-neotree-config)
+  )
 
 (setq scroll-margin 3
       scroll-conservatively 101
