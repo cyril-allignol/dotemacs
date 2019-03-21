@@ -129,7 +129,6 @@
   :bind ([f3] . neotree-toggle)
   :config
   (doom-themes-neotree-config)
-  (setq neo-smart-open t)
   )
 
 (setq scroll-margin 3
