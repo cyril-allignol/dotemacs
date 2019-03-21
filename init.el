@@ -210,11 +210,12 @@
   :init
   (add-hook 'LaTeX-mode-hook
             (lambda ()
-              (setq TeX-PDF-mode t)
+              (TeX-PDF-mode)
               (turn-on-reftex)
               (company-mode)
-              (setq TeX-debug-bad-boxes t)
-              (setq TeX-debug-warnings t)
+              (TeX-debug-bad-boxes)
+              (TeX-debug-warnings)
+              (TeX-source-correlate-mode)
               )
             )
   :config
@@ -241,6 +242,17 @@
   ("C-c g"     . writegood-mode)
   ("C-c C-g g" . writegood-grade-level)
   ("C-c C-g e" . writegood-reading-ease))
+
+;;=======================================
+;;                 PDF
+;;=======================================
+(use-package pdf-view
+  :ensure pdf-tools
+  :mode ("\\.pdf\\'" . pdf-view-mode)
+  :config
+  (add-hook 'TeX-after-compilation-finished-functions
+            #'TeX-revert-document-buffer)
+  )
 
 ;;=======================================
 ;;                 Coq
