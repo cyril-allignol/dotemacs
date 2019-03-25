@@ -437,6 +437,33 @@
   (global-diff-hl-mode +1))
 
 ;;=======================================
+;;             MAIL
+;;=======================================
+(use-package wanderlust
+  :commands (wl wl-other-frame)
+  :bind ("C-c m" . wl-other-frame)
+  :init
+  (setq wl-summary-line-format "%T%P %D/%M (%W) %h:%m %t%[%25(%c %f%) %] %s"
+        wl-summary-width 150)
+  (setq wl-message-ignored-field-list '("^.*:")
+        wl-message-visible-field-list
+        '("^\\(To\\|Cc\\):"
+          "^Subject:"
+          "^\\(From\\|Reply-To\\):"
+          "^Organization:"
+          "^\\(Posted\\|Date\\):"
+          )
+        wl-message-sort-field-list
+        '("^From" "^Organization:" "^Subject" "^Date" "^To" "^Cc")
+        )
+  )
+
+(setq wl-use-folder-petname '(modeline ask-folder read-folder))
+(setq wl-summary-showto-folder-regexp ".*Sent.*")
+
+
+
+;;=======================================
 ;;             MAGIT
 ;;=======================================
 (use-package magit
