@@ -404,6 +404,10 @@
 ;;=======================================
 (use-package org
   :defer t
+  :bind
+  (("C-c l" . org-store-link)
+   ("C-c a" . org-agenda)
+   ("C-c c" . org-capture))
   :init
   (setq org-todo-keywords
         '((sequence "TODO" "STARTED" "|" "DONE")
@@ -412,6 +416,7 @@
   (setq org-enforce-todo-dependencies t)
   (setq org-log-done 'time)
   (setq org-src-fontify-natively t)
+  (setq org-default-notes-file "~/Cloud/notes.org")
   )
 
 (org-babel-do-load-languages
