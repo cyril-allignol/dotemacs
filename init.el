@@ -416,7 +416,8 @@
   (setq org-enforce-todo-dependencies t)
   (setq org-log-done 'time)
   (setq org-src-fontify-natively t)
-  (setq org-default-notes-file "~/Cloud/notes.org")
+  (setq org-agenda-files '("~/Cloud/Org")
+        org-default-notes-file "~/Cloud/Org/notes.org")
   )
 
 (org-babel-do-load-languages
@@ -449,19 +450,47 @@
         wl-message-visible-field-list
         '("^\\(To\\|Cc\\):"
           "^Subject:"
-          "^\\(From\\|Reply-To\\):"
+          "^From:"
           "^Organization:"
           "^\\(Posted\\|Date\\):"
           )
         wl-message-sort-field-list
         '("^From" "^Organization:" "^Subject" "^Date" "^To" "^Cc")
         )
+  (setq wl-forward-subject-prefix "Fwd: " )    ;; use "Fwd: " not "Forward: "
+  ;; from a WL-mailinglist post by David Bremner
+  ;; Invert behaviour of with and without argument replies.
+  ;; just the author
+  (setq wl-draft-reply-without-argument-list
+        '(("Reply-To" ("Reply-To") nil nil)
+          ("Mail-Reply-To" ("Mail-Reply-To") nil nil)
+          ("From" ("From") nil nil)))
+  ;; bombard the world
+  (setq wl-draft-reply-with-argument-list
+        '(("Followup-To" nil nil ("Followup-To"))
+          ("Mail-Followup-To" ("Mail-Followup-To") nil ("Newsgroups"))
+          ("Reply-To" ("Reply-To") ("To" "Cc" "From") ("Newsgroups"))
+          ("From" ("From") ("To" "Cc") ("Newsgroups"))))
+  (setq wl-use-folder-petname '(modeline ask-folder read-folder))
+  (setq wl-summary-showto-folder-regexp ".*Sent.*")
+  (setq mime-view-buttons-visible nil
+        mime-view-mailcap-files '("~/.emacs.d/mailcap")
+        mime-play-find-every-situations nil
+        mime-play-delete-file-immediately nil)
+  (add-hook 'mime-view-mode-hook
+            #'(lambda () (setq show-trailing-whitespace nil)))
+
+  :config
+  ;; Colors
+  (set-face-foreground
+   'wl-highlight-message-header-contents (doom-color 'fg)
+   'wl-highlight-message-important-header-contents (doom-color 'cyan)
+   'wl-highlight-message-signature (doom-color 'comments)
+   'wl-highlight-summary-normal-face (doom-color 'fg)
+   'wl-highlight-summary-important-face (doom-color 'error)
+   'wl-highlight-summary-deleted-face (doom-color 'comments)
+   )
   )
-
-(setq wl-use-folder-petname '(modeline ask-folder read-folder))
-(setq wl-summary-showto-folder-regexp ".*Sent.*")
-
-
 
 ;;=======================================
 ;;             MAGIT
