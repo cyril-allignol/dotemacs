@@ -117,7 +117,7 @@
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
   :init
-  (setq doom-modeline-buffer-file-name-style 'truncate-upto-root
+  (setq doom-modeline-buffer-file-name-style 'buffer-name
         doom-modeline-icon t
         doom-modeline-major-mode-icon t
         doom-modeline-major-mode-color-icon t
