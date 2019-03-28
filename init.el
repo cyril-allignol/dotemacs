@@ -350,9 +350,8 @@
   :ensure merlin
   :hook tuareg-mode
   :init
-  (add-hook 'tuareg-mode-hook 'auto-complete-mode t)
-  (setq merlin-use-auto-complete-mode 'easy)
-  (setq merlin-ac-setup 'easy)
+  (with-eval-after-load 'company
+    (add-to-list 'company-backends 'merlin-company-backend))
   (setq merlin-command 'opam))
 
 ;;=======================================
@@ -518,3 +517,18 @@
   (setq helm-autoresize-min-height 20)
   (helm-autoresize-mode 1)
   (helm-mode 1))
+
+;;=======================================
+;;            COMPANY
+;;=======================================
+(use-package company
+  :hook (after-init . global-company-mode)
+  :bind (("C-<tab>" . company-complete)
+         :map company-active-map ("<tab>" . company-complete-common-or-cycle))
+  :config
+  (setq company-idle-delay nil ;; on-demand completion
+        company-minimum-prefix-length 0
+        company-show-numbers t
+        company-selection-wrap-around t
+        )
+  )
