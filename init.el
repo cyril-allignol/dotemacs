@@ -479,17 +479,6 @@
         mime-play-delete-file-immediately nil)
   (add-hook 'mime-view-mode-hook
             #'(lambda () (setq show-trailing-whitespace nil)))
-
-  :config
-  ;; Colors
-  (set-face-foreground
-   'wl-highlight-message-header-contents (doom-color 'fg)
-   'wl-highlight-message-important-header-contents (doom-color 'cyan)
-   'wl-highlight-message-signature (doom-color 'comments)
-   'wl-highlight-summary-normal-face (doom-color 'fg)
-   'wl-highlight-summary-important-face (doom-color 'error)
-   'wl-highlight-summary-deleted-face (doom-color 'comments)
-   )
   )
 
 ;;=======================================
