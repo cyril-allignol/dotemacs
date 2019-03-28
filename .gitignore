@@ -8,4 +8,5 @@ elpa/**
 lisp/**
 transient/**
 session.*
+\#recentf\#
 .org-id-locations
