@@ -259,15 +259,12 @@
 ;; Load company-coq when opening Coq files
 (use-package company-coq
   :defer t
+  :ensure proof-general
   :mode ("\\.v\\'" . coq-mode) ;; Open .v files with Proof General's Coq mode
   :init
-  (add-hook 'coq-mode-hook
-            (lambda ()
-              (load "~/.emacs.d/lisp/PG/generic/proof-site")
-              )
-            )
   (add-hook 'coq-mode-hook #'company-coq-mode)
   :config
+  (setq proof-splash-enable nil)
   (setq coq-symbols-list
         '(lambda ()
            (mapc (lambda (pair) (push pair prettify-symbols-alist))
