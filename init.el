@@ -256,18 +256,22 @@
 ;;=======================================
 ;;                 Coq
 ;;=======================================
-;; Load company-coq when opening Coq files
-(use-package company-coq
-  :defer t
-  :ensure proof-general
-  :mode ("\\.v\\'" . coq-mode) ;; Open .v files with Proof General's Coq mode
+(use-package proof-general
+  :mode ("\\.v\\'" . coq-mode)
   :init
-  (add-hook 'coq-mode-hook #'company-coq-mode)
+  (setq proof-splash-enable nil
+        proof-sticky-errors t)
+  )
+
+(use-package company-coq
+  :commands (company-coq-mode)
+  :hook (coq-mode . company-coq-mode)
   :config
-  (setq proof-splash-enable nil)
-  (setq coq-symbols-list
-        '(lambda ()
-           (mapc (lambda (pair) (push pair prettify-symbols-alist))
+  (setq company-coq-disabled-features '(hello))
+  (setq
+   coq-symbols-list
+   (lambda ()
+     (setq-local prettify-symbols-alist
                  '(("~" . ?¬) ("empty" . ?Ø) ("*" . ?×) ("\\in" . ?\u220A)
                    ("~exists" . ?\u2204)
                    ("Qed." . ?■) ("Defined." . ?□)
