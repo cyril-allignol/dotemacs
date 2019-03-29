@@ -434,14 +434,6 @@
 (setq org-confirm-babel-evaluate nil)
 
 ;;=======================================
-;;             DIFF MODE
-;;=======================================
-(use-package diff-hl
-  :defer t
-  :config
-  (global-diff-hl-mode +1))
-
-;;=======================================
 ;;             MAIL
 ;;=======================================
 (use-package wanderlust
@@ -489,9 +481,13 @@
 ;;             MAGIT
 ;;=======================================
 (use-package magit
-  :defer t
-  :bind
-  ("C-x g" . magit-status))
+  :bind ("C-x g" . magit-status))
+
+(use-package diff-hl
+  :config
+  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
+  (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
+  (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
 
 ;;=======================================
 ;;              HELM
