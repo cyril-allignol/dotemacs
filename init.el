@@ -385,6 +385,12 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;=======================================
+;;           MOVING AROUND
+;;=======================================
+(use-package crux
+  :bind (("C-a" . crux-move-beginning-of-line)))
+
+;;=======================================
 ;;              DOS - UNIX
 ;;=======================================
 ;; convert a buffer from DOS `^M' end of lines to Unix end of lines
