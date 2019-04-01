@@ -377,8 +377,12 @@
 ;; ignore case when reading a file name completion
 (setq read-file-name-completion-ignore-case t)
 
+;;=======================================
+;;      I HATE TRAILING WHITESPACE
+;;=======================================
 ;; highlight trailing whitespaces in all modes
 (setq-default show-trailing-whitespace t)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;=======================================
 ;;              DOS - UNIX
