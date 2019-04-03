@@ -207,11 +207,11 @@
   :mode ("\\.tex\\'" . latex-mode)
   :bind (:map LaTeX-mode-map ("C-c l" . TeX-error-overview))
   :init
+  (use-package company-auctex :init (company-auctex-init))
   (add-hook 'LaTeX-mode-hook
             (lambda ()
               (TeX-PDF-mode)
               (turn-on-reftex)
-              (company-mode)
               (TeX-debug-bad-boxes)
               (TeX-debug-warnings)
               (TeX-source-correlate-mode)
@@ -251,6 +251,7 @@
   :config
   (add-hook 'TeX-after-compilation-finished-functions
             #'TeX-revert-document-buffer)
+  (setq pdf-annot-activate-created-annotations t)
   )
 
 ;;=======================================
