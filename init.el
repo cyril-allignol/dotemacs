@@ -22,6 +22,7 @@
 
 (require 'local nil t)
 (require 'private nil t)
+(setq auth-sources '((:source "~/.authinfo.gpg")))
 
 ;;=======================================
 ;;              PACKAGES
