@@ -85,6 +85,10 @@
       inhibit-startup-message t
       inhibit-startup-echo-area-message "")
 
+(if (member "Hack" (font-family-list))
+    (set-frame-font "Hack-10" nil t)
+  (set-frame-font "DejaVu Sans Mono-10" nil t))
+
 (use-package all-the-icons)
 
 (use-package doom-themes
@@ -434,7 +438,8 @@
           (sequence "|" "CANCELED")))
   (setq org-enforce-todo-dependencies t)
   (setq org-log-done 'time)
-  (setq org-src-fontify-natively t)
+  (setq org-src-fontify-natively t
+        org-pretty-entities t)
   (setq org-agenda-files '("~/Cloud/Org")
         org-default-notes-file "~/Cloud/Org/notes.org")
   )
