@@ -1,6 +1,7 @@
 local.el
 private.el
 custom.el
+config.el
 recentf
 ac-comphist.dat
 auto-save-list/**
