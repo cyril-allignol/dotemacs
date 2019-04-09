@@ -341,6 +341,16 @@
             org-pretty-entities t)
       (setq org-agenda-files '("~/Cloud/Org")
             org-default-notes-file "~/Cloud/Org/notes.org")
+
+      (use-package ox-latex :ensure nil)
+      (add-to-list 'org-latex-default-packages-alist '("mathletters" "ucs"))
+      (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
+      (add-to-list 'org-latex-packages-alist '("" "minted"))
+      (setq org-latex-listings 'minted
+            org-latex-pdf-process
+            '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+              "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f")
+            )
       )
 
     (org-babel-do-load-languages
