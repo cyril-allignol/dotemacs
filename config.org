@@ -334,17 +334,17 @@
        ("C-c c" . org-capture))
       :init
       (setq org-todo-keywords
-            '((sequence "TODO" "STARTED" "|" "DONE")
-              (sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED")
-              (sequence "|" "CANCELED")))
+            '((sequence
+               "TODO" "STARTED" "WAITING" "|" "DONE" "DEFERRED" "CANCELED")))
       (setq org-enforce-todo-dependencies t)
       (setq org-log-done 'time)
       (setq org-src-fontify-natively t
             org-src-tab-acts-natively t
             org-pretty-entities t)
       (setq org-agenda-files '("~/Cloud/Org")
-            org-default-notes-file "~/Cloud/Org/notes.org")
-
+            org-default-notes-file "~/Cloud/Org/notes.org"
+            org-agenda-ndays 7
+            org-agenda-start-on-weekday nil)
       (use-package ox-latex :ensure nil)
       (add-to-list 'org-latex-default-packages-alist '("mathletters" "ucs"))
       (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
