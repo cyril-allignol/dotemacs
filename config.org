@@ -1,3 +1,6 @@
+#+TITLE: Emacs configuration
+#+LANGUAGE: en
+
 * Startup process
   Allow a larger GC space at startup, then garbage-collect and reduce
   this amount (taken from [[https://github.com/jwiegley/dot-emacs/blob/master/init.el][here]]):
