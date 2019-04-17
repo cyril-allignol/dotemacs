@@ -501,6 +501,10 @@
   (setq python-shell-interpreter "python3"))
 #+END_SRC
 
+** BNF
+#+BEGIN_SRC emacs-lisp +n
+(use-package bnf-mode :mode "\\.bnf\\'")
+#+END_SRC
 * Writing
   I require left justification with automatic line breaking for anything
   in text mode:
