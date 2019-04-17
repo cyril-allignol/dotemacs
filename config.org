@@ -334,8 +334,10 @@
        ("C-c c" . org-capture))
       :init
       (setq org-todo-keywords
-            '((sequence
-               "TODO" "STARTED" "WAITING" "|" "DONE" "DEFERRED" "CANCELED")))
+            '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)")
+              (sequence "DELEGATED" "|" "DEFERRED" "CANCELED(c)")))
+      (setq org-todo-keyword-faces
+            '(("WAITING" . org-warning) ("DELEGATED" . org-wait)))
       (setq org-enforce-todo-dependencies t)
       (setq org-log-done 'time)
       (setq org-src-fontify-natively t
@@ -629,10 +631,14 @@
       )
   #+END_SRC
 * Other specific tools
+** Passwords
+#+BEGIN_SRC emacs-lisp +n
+(use-package pass)
+#+END_SRC
 ** CSV
    #+BEGIN_SRC emacs-lisp +n
 (use-package csv-mode :mode "\\.[Cc][Ss][Vv]\\'")
-#+END_SRC
+   #+END_SRC
 ** Window$ files
    The following functions handle DOS-style end of lines:
    #+BEGIN_SRC emacs-lisp +n
