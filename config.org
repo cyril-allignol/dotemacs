@@ -342,7 +342,15 @@
       (setq org-log-done 'time)
       (setq org-src-fontify-natively t
             org-src-tab-acts-natively t
+            org-src-window-setup 'current-window
+            org-ellipsis "⤵"
             org-pretty-entities t)
+      (add-to-list 'org-structure-template-alist
+                   '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
+      (add-to-list 'org-structure-template-alist
+                   '("ml" "#+BEGIN_SRC ocaml\n?\n#+END_SRC"))
+      (add-to-list 'org-structure-template-alist
+                   '("py" "#+BEGIN_SRC python\n?\n#+END_SRC"))
       (setq org-agenda-files '("~/Cloud/Org")
             org-default-notes-file "~/Cloud/Org/notes.org"
             org-agenda-ndays 7
