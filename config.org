@@ -582,7 +582,19 @@
   ("C-c C-g g" . writegood-grade-level)
   ("C-c C-g e" . writegood-reading-ease))
 #+END_SRC
-
+   Search Thesaurus for synonyms:
+#+BEGIN_SRC emacs-lisp +n
+  (use-package synosaurus
+    :ensure t
+    :ensure popup
+    :bind (("C-c C-s l" . synosaurus-lookup)
+           ("C-c C-s r" . synosaurus-choose-and-replace)
+           ("C-c C-s i" . synosaurus-choose-and-insert))
+    :config
+    (setq-default synosaurus-backend 'synosaurus-backend-wordnet)
+    (setq-default synosaurus-choose-method 'popup)
+    (add-hook 'after-init-hook #'synosaurus-mode))
+#+END_SRC
 ** PDF
    I sometimes like to open PDFs directly in emacs, which I do with
    PDF-tools:
