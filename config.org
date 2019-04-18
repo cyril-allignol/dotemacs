@@ -546,7 +546,6 @@
   (setq TeX-parse-self t) ; Enable parse on load.
   (setq TeX-auto-save t) ; Enable parse on save.
   (setq-default TeX-clean-confirm nil)
-  (setq-default TeX-master nil) ; in newer versions: dwim
   (add-hook 'TeX-language-fr-hook
             (lambda () (ispell-change-dictionary "francais")))
   (add-hook 'TeX-language-en-hook
