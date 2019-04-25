@@ -6,7 +6,6 @@ recentf
 ac-comphist.dat
 auto-save-list/**
 elpa/**
-lisp/**
 transient/**
 session.*
 \#recentf\#

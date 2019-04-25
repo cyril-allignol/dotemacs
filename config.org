@@ -326,55 +326,82 @@
 #+END_SRC
 
 * Org
-  #+BEGIN_SRC emacs-lisp +n
-    (use-package org
-      :bind
-      (("C-c l" . org-store-link)
-       ("C-c a" . org-agenda)
-       ("C-c c" . org-capture))
-      :init
-      (setq org-todo-keywords
-            '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)")
-              (sequence "DELEGATED" "|" "DEFERRED" "CANCELED(c)")))
-      (setq org-todo-keyword-faces
-            '(("WAITING" . org-warning) ("DELEGATED" . org-wait)))
-      (setq org-enforce-todo-dependencies t)
-      (setq org-log-done 'time)
-      (setq org-src-fontify-natively t
-            org-src-tab-acts-natively t
-            org-src-window-setup 'current-window
-            org-ellipsis "⤵"
-            org-pretty-entities t)
-      (add-to-list 'org-structure-template-alist
-                   '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
-      (add-to-list 'org-structure-template-alist
-                   '("ml" "#+BEGIN_SRC ocaml\n?\n#+END_SRC"))
-      (add-to-list 'org-structure-template-alist
-                   '("py" "#+BEGIN_SRC python\n?\n#+END_SRC"))
-      (setq org-agenda-files '("~/Cloud/Org")
-            org-default-notes-file "~/Cloud/Org/notes.org"
-            org-agenda-ndays 7
-            org-agenda-start-on-weekday nil)
-      (use-package ox-latex :ensure nil)
-      (add-to-list 'org-latex-default-packages-alist '("mathletters" "ucs"))
-      (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
-      (add-to-list 'org-latex-packages-alist '("" "minted"))
-      (setq org-latex-listings 'minted
-            org-latex-pdf-process
-            '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-              "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f")
-            )
-      )
+Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]].
+#+BEGIN_SRC emacs-lisp +n
+  (use-package org
+    :bind
+    (("C-c l" . org-store-link)
+     ("C-c a" . org-agenda)
+     ("C-c c" . org-capture))
+    :init
+    (setq org-todo-keywords
+          '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)")
+            (sequence "DELEGATED" "|" "DEFERRED" "CANCELED(c)")))
+    (setq org-todo-keyword-faces
+          '(("WAITING" . org-warning) ("DELEGATED" . org-wait)))
+    (setq org-enforce-todo-dependencies t)
+    (setq org-log-done 'time)
+    (setq org-directory "~/Cloud/Org")
+    (setq org-capture-templates
+          (quote (("t" "Task" entry (file "~/Cloud/Org/refile.org")
+                   "* TODO %?\n%U\n%a\n" :empty-lines 1)
+                  ("n" "Note" entry (file "~/Cloud/Org/refile.org")
+                   "* %? :NOTE:\n%U\n%a\n" :empty-lines 1)
+                  ("j" "Journal" entry (file+datetree "~/Cloud/Org/journal.org")
+                   "* %?\n%U\n" :empty-lines 1)
+                  ("m" "Meeting" entry (file "~/Cloud/Org/refile.org")
+                   "* MEETING with %? :MEETING:\n%U"
+                   :clock-in t :clock-resume t :empty-lines 1)
+                  ("p" "Phone call" entry (file "~/Cloud/Org/refile.org")
+                   "* PHONE CALL with %? :PHONE:\n%U"
+                   :clock-in t :clock-resume t :empty-lines 1))))
+    (setq org-src-fontify-natively t
+          org-src-tab-acts-natively t
+          org-src-window-setup 'current-window
+          org-ellipsis "⤵"
+          org-pretty-entities t)
+    (add-to-list 'org-structure-template-alist
+                 '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
+    (add-to-list 'org-structure-template-alist
+                 '("ml" "#+BEGIN_SRC ocaml\n?\n#+END_SRC"))
+    (add-to-list 'org-structure-template-alist
+                 '("py" "#+BEGIN_SRC python\n?\n#+END_SRC"))
+    (setq org-agenda-files '("~/Cloud/Org")
+          org-default-notes-file "~/Cloud/Org/refile.org"
+          org-agenda-include-diary nil
+          org-agenda-diary-file "~/Cloud/Org/diary.org"
+          org-agenda-ndays 10
+          org-agenda-start-on-weekday nil
+          )
+    (setq org-refile-targets (quote ((nil :maxlevel . 4)
+                                     (org-agenda-files :maxlevel . 4)))
+          org-refile-allow-creating-parent-nodes (quote confirm)
+          org-refile-use-outline-path t
+          org-outline-path-complete-in-steps nil
+          )
+    (use-package ox-latex :ensure nil)
+    (add-to-list 'org-latex-default-packages-alist '("mathletters" "ucs"))
+    (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
+    (add-to-list 'org-latex-packages-alist '("" "minted"))
+    (setq org-latex-listings 'minted
+          org-latex-pdf-process
+          '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+            "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f")
+          )
+    )
 
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((emacs-lisp . nil)
-       (ocaml . t)
-       (python . t)
-       (R . t)))
-    (setq org-babel-python-command "python3")
-    (setq org-confirm-babel-evaluate nil)
-  #+END_SRC
+  (require 'french-holidays)
+  (setq calendar-holidays holiday-french-holidays)
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . nil)
+     (ocaml . t)
+     (python . t)
+     (R . t)))
+  (setq org-babel-python-command "python3")
+  (setq org-confirm-babel-evaluate nil)
+#+END_SRC
 * Programming
 ** Git
    I use Magit for version control management with diff-hl as a diff
