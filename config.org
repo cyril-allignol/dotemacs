@@ -229,8 +229,7 @@
    #+END_SRC
    I use Helm for "smart" command completion:
    #+BEGIN_SRC emacs-lisp +n
-     (use-package helm-config
-       :ensure helm
+     (use-package helm
        :bind
        (("C-c h" . helm-command-prefix)
         ("M-x" . helm-M-x)
@@ -487,43 +486,43 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
    For OCaml, I use a combination of Tuareg, Merlin (with company) and
    utop. All of this being configured to work with my opam-based OCaml
    distribution:
-   #+BEGIN_SRC emacs-lisp +n
-(use-package utop
-  :defer t
-  :hook (tuareg-mode . utop-minor-mode)
-  :init
-  (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
-  (setq utop-command "opam config exec -- utop -emacs"))
+#+BEGIN_SRC emacs-lisp +n
+  (use-package utop
+    :hook (tuareg-mode . utop-minor-mode)
+    :init
+    (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
+    (setq utop-command "opam config exec -- utop -emacs"))
 
-(use-package tuareg-mode
-  :defer t
-  :ensure tuareg
-  :mode "\\.ml[iylp]?"
-  :mode
-  (("_oasis\\'" . conf-mode)
-   ("_tags\\'" . conf-mode)
-   ("_log\\'" . conf-mode))
-  :init
-  ;; Setup environment variables using opam
-  (dolist
-      (var (car (read-from-string
-                 (shell-command-to-string "opam config env --sexp"))))
-    (setenv (car var) (cadr var)))
-  (setq exec-path (split-string (getenv "PATH") path-separator))
-  (push (concat (getenv "OCAML_TOPLEVEL_PATH")
-                "/../../share/emacs/site-lisp") load-path)
-  ;; :config
-  ;; (setq tuareg-prettify-symbol-mode t)
-  )
+  (use-package tuareg
+    :mode (("\\.ml[ilp]?" . tuareg-mode)
+           ("\\.mly$" . tuareg-menhir-mode)
+           ("[./]opam_?\\'" . tuareg-opam-mode)
+           ("_oasis\\'" . conf-mode)
+           ("_tags\\'" . conf-mode)
+           ("_log\\'" . conf-mode))
+    :init
+    ;; Setup environment variables using opam
+    (dolist
+        (var (car (read-from-string
+                   (shell-command-to-string "opam config env --sexp"))))
+      (setenv (car var) (cadr var)))
+    (setq exec-path (split-string (getenv "PATH") path-separator))
+    (push (concat (getenv "OCAML_TOPLEVEL_PATH")
+                  "/../../share/emacs/site-lisp") load-path)
+    (dolist (ext '(".cmo" ".cmx" ".cma" ".cmxa" ".cmi" ".cmt" ".cmti"
+                   ".annot" ".depends"))
+      (add-to-list 'completion-ignored-extensions ext))
+    ;; :config
+    ;; (setq tuareg-prettify-symbol-mode t)
+    )
 
-(use-package merlin-mode
-  :defer t
-  :ensure merlin
-  :hook tuareg-mode
-  :init
-  (with-eval-after-load 'company
-    (add-to-list 'company-backends 'merlin-company-backend))
-  (setq merlin-command 'opam))
+  (use-package merlin-mode
+    :ensure merlin
+    :hook tuareg-mode
+    :init
+    (with-eval-after-load 'company
+      (add-to-list 'company-backends 'merlin-company-backend))
+    (setq merlin-command 'opam))
 #+END_SRC
 
 ** Python
