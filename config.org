@@ -517,6 +517,9 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
     ;; (setq tuareg-prettify-symbol-mode t)
     )
 
+  (use-package dune
+    :mode ("dune\\'" . dune-mode))
+
   (use-package merlin-mode
     :ensure merlin
     :hook tuareg-mode
