@@ -229,7 +229,8 @@
    #+END_SRC
    I use Helm for "smart" command completion:
    #+BEGIN_SRC emacs-lisp +n
-     (use-package helm
+     (use-package helm-config
+       :ensure helm
        :bind
        (("C-c h" . helm-command-prefix)
         ("M-x" . helm-M-x)
