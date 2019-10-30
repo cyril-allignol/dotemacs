@@ -1,3 +1,17 @@
+;; Allow a larger GC space at startup, then garbage-collect and reduce
+;; this amount (taken from
+;; [[https://github.com/jwiegley/dot-emacs/blob/master/init.el][here]]):
+(setq package-enable-at-startup nil
+      message-log-max 16384
+      gc-cons-threshold 402653184
+      gc-cons-percentage 0.6)
+
+(add-hook 'after-init-hook
+          `(lambda ()
+             (setq gc-cons-threshold 800000
+                   gc-cons-percentage 0.1)
+             (garbage-collect)) t)
+
 ;; I don't use system packages, and manage emacs-specific packages with
 ;; use-package. First set-up GNU and MELPA repositories and initialize
 ;; built-in package manager:

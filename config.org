@@ -1,22 +1,6 @@
 #+TITLE: Emacs configuration
 #+LANGUAGE: en
 
-* Startup process
-  Allow a larger GC space at startup, then garbage-collect and reduce
-  this amount (taken from [[https://github.com/jwiegley/dot-emacs/blob/master/init.el][here]]):
-  #+BEGIN_SRC emacs-lisp +n
-    (setq package-enable-at-startup nil
-          message-log-max 16384
-          gc-cons-threshold 402653184
-          gc-cons-percentage 0.6)
-
-    (add-hook 'after-init-hook
-              `(lambda ()
-                 (setq gc-cons-threshold 800000
-                       gc-cons-percentage 0.1)
-                 (garbage-collect)) t)
-  #+END_SRC
-
 * Paths
   Set the load path for local packages:
   #+BEGIN_SRC emacs-lisp +n
