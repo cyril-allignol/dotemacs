@@ -427,7 +427,7 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
                    ("Qed." . ?■) ("Defined." . ?□)
                    ("==>*" . (?\u27F9 (Br . Bl) ?*))
                    ("=?" . ?\u225F) ("<=?" . (?\u2264 (Br . Bl) ??))
-                   ("[|" . ?\u27E6) ("|]" . ?\u27E7) ("\\|" . ?\u21D3)
+                   ("\\|" . ?\u21D3)
                    ;; ("|]\\|" . (?\u27E7 (Br . Bl) ?\u21D3))
                    ("\\(" . ?\u27E8) ("\\)" . ?\u27E9)
                    ("\\:" . ?\u2236) ("|=" . ?\u22A7)
