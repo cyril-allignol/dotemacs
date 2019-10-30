@@ -533,11 +533,11 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
    Here I just set-up the interpreter to be Python 3 (not necessary on
    most recent Linux systems):
    #+BEGIN_SRC emacs-lisp +n
-(use-package python
-  :mode ("\\.py\\'" . python-mode)
-  :config
-  (setq python-shell-interpreter "python3"))
-#+END_SRC
+     (use-package python
+       :mode ("\\.py\\'" . python-mode)
+       :config
+       (setq python-shell-interpreter "python3"))
+   #+END_SRC
 
 ** BNF
 #+BEGIN_SRC emacs-lisp +n
