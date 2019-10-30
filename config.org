@@ -141,10 +141,9 @@
 
 * General behavior and tools
 ** Whitespace management
-   I hate trailing white space, so I remove it on save (and display it
-   when it's there):
+   I hate trailing white space, so I remove it on save:
    #+BEGIN_SRC emacs-lisp +n
-     (setq-default show-trailing-whitespace t)
+     ;; (setq-default show-trailing-whitespace t)
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
    #+END_SRC
    Also, I hate tabs :), so I only use spaces for indentation:
