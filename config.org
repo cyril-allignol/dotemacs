@@ -94,33 +94,36 @@
    I use doom themes, with a theme switching scheme (taken [[https://github.com/habamax/.emacs.d/blob/master/lisp/haba-appearance.el][here]]) to
    toggle between light and dark in a keystroke:
    #+BEGIN_SRC emacs-lisp +n
-(use-package doom-themes
-  :bind ([f10] . my/toggle-theme)
-  :init
-  (doom-themes-org-config)
-  ;; Theme cycling
-  ;; taken from:
-  ;; https://github.com/habamax/.emacs.d/blob/master/lisp/haba-appearance.el
-  (defvar *my-theme-light* 'doom-one-light)
-  (defvar *my-theme-dark* 'doom-one)
-  (defvar *my-current-theme* *my-theme-dark*)
-  (load-theme *my-theme-dark*)
-  ;; disable other themes before loading new one
-  (defadvice load-theme (before theme-dont-propagate activate)
-    "Disable theme before loading new one."
-    (mapc #'disable-theme custom-enabled-themes))
-  (defun my/next-theme (theme)
-    (if (eq theme 'default)
-        (disable-theme *my-current-theme*)
-      (progn
-        (load-theme theme t)))
-    (setq *my-current-theme* theme))
-  (defun my/toggle-theme ()
-    (interactive)
-    (cond
-     ((eq *my-current-theme* *my-theme-dark*) (my/next-theme *my-theme-light*))
-     ((eq *my-current-theme* *my-theme-light*) (my/next-theme *my-theme-dark*))))
-  )
+     ;; Treat all themes as safe; no query before use.
+     (setf custom-safe-themes t)
+
+     (use-package doom-themes
+       :bind ([f10] . my/toggle-theme)
+       :init
+       (doom-themes-org-config)
+       ;; Theme cycling
+       ;; taken from:
+       ;; https://github.com/habamax/.emacs.d/blob/master/lisp/haba-appearance.el
+       (defvar *my-theme-light* 'doom-one-light)
+       (defvar *my-theme-dark* 'doom-one)
+       (defvar *my-current-theme* *my-theme-dark*)
+       (load-theme *my-theme-dark*)
+       ;; disable other themes before loading new one
+       (defadvice load-theme (before theme-dont-propagate activate)
+         "Disable theme before loading new one."
+         (mapc #'disable-theme custom-enabled-themes))
+       (defun my/next-theme (theme)
+         (if (eq theme 'default)
+             (disable-theme *my-current-theme*)
+           (progn
+             (load-theme theme t)))
+         (setq *my-current-theme* theme))
+       (defun my/toggle-theme ()
+         (interactive)
+         (cond
+          ((eq *my-current-theme* *my-theme-dark*) (my/next-theme *my-theme-light*))
+          ((eq *my-current-theme* *my-theme-light*) (my/next-theme *my-theme-dark*))))
+       )
 #+END_SRC
 
 ** Modeline
