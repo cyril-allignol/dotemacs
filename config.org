@@ -193,23 +193,34 @@
   (savehist-mode +1))
 #+END_SRC
 
-** Global keys
+** Key bindings
+   Making it easier to discover Emacs key presses.
+   #+BEGIN_SRC emacs-lisp +n
+     (use-package which-key
+       :diminish which-key-mode
+       :init (which-key-mode)
+       :config
+       (which-key-setup-side-window-bottom)
+       (setq which-key-idle-delay 0.05)
+     )
+   #+END_SRC
    I map a few function keys on navigation and compilation...
    #+BEGIN_SRC emacs-lisp +n
-(define-key global-map [f4]  'goto-char)
-(define-key global-map [f5]  'goto-line)
-(define-key global-map [f6]  'compile)
-(define-key global-map [f8]  'next-error)
-(define-key global-map [shift f8]  'previous-error)
+     (define-key global-map [f1]  'goto-char)
+     (define-key global-map [f2]  'goto-line)
+     (define-key global-map [f5] '(lambda () (interactive) (revert-buffer nil t nil)))
+     (define-key global-map [f6]  'compile)
+     (define-key global-map [f8]  'next-error)
+     (define-key global-map [shift f8]  'previous-error)
 #+END_SRC
    ... and the two-superior on completion:
    #+BEGIN_SRC emacs-lisp +n
-(define-key global-map [?²]  'dabbrev-expand)
-#+END_SRC
+     (define-key global-map [?²]  'dabbrev-expand)
+   #+END_SRC
    Finally, I re-map =C-x C-b=:
    #+BEGIN_SRC emacs-lisp +n
-(define-key global-map (kbd "C-x C-b") 'electric-buffer-list)
-#+END_SRC
+     (define-key global-map (kbd "C-x C-b") 'electric-buffer-list)
+   #+END_SRC
 
 ** Mini-buffer
    I want to ignore case in the mini-buffer for filename completion:
