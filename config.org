@@ -150,7 +150,10 @@
    #+BEGIN_SRC emacs-lisp +n
      (setq-default indent-tabs-mode nil)
    #+END_SRC
-
+   Finally, I like my buffers full-width:
+   #+BEGIN_SRC emacs-lisp +n
+     fill-column 80
+   #+END_SRC
 ** Scolling
    I like a smooth scrolling rather than the default page-by-page:
    #+BEGIN_SRC emacs-lisp +n
