@@ -425,57 +425,58 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
    For convenience, I also use =company-coq=, with an extended symbols
    list:
    #+BEGIN_SRC emacs-lisp +n
-(use-package company-coq
-  :commands (company-coq-mode)
-  :hook (coq-mode . company-coq-mode)
-  :config
-  (setq company-coq-disabled-features '(hello))
-  (setq
-   coq-symbols-list
-   (lambda ()
-     (setq-local prettify-symbols-alist
-                 '(("~" . ?¬) ("empty" . ?Ø) ("*" . ?×) ("\\in" . ?\u220A)
-                   ("~exists" . ?\u2204)
-                   ("Qed." . ?■) ("Defined." . ?□)
-                   ("==>*" . (?\u27F9 (Br . Bl) ?*))
-                   ("=?" . ?\u225F) ("<=?" . (?\u2264 (Br . Bl) ??))
-                   ("\\|" . ?\u21D3)
-                   ;; ("|]\\|" . (?\u27E7 (Br . Bl) ?\u21D3))
-                   ("\\(" . ?\u27E8) ("\\)" . ?\u27E9)
-                   ("\\:" . ?\u2236) ("|=" . ?\u22A7)
-                   ("Gamma'" . (?Γ (Br . Bl) ?'))
-                   ("Gamma''" . (?Γ (Br . Bl) ?' (Br . Bl) ?'))
-                   ("Gamma0" . (?Γ (Br . Bl) ?0))
-                   ("Gamma1" . (?Γ (Br . Bl) ?1))
-                   ("Gamma2" . (?Γ (Br . Bl) ?2))
-                   ("sigma'" . (?σ (Br . Bl) ?'))
-                   ("sigma''" . (?σ (Br . Bl) ?' (Br . Bl) ?'))
-                   ("sigma0" . (?σ (Br . Bl) ?0))
-                   ("sigma1" . (?σ (Br . Bl) ?1))
-                   ("sigma2" . (?σ (Br . Bl) ?2))
-                   ;; same as other capital letters -> confusing
-                   ;; ("Alpha" . ?Α) ("Beta" . ?Β) ("Epsilon" . ?Ε) ("Zeta" . ?Ζ)
-                   ;; ("Eta" . ?Η) ("Iota" . ?Ι) ("Kappa" . ?Κ) ("Mu" . ?Μ)
-                   ;; ("Nu" . ?Ν) ("Omicron" . ?Ο) ("Rho" . ?Ρ) ("Tau" . ?Τ)
-                   ;; ("Upsilon" . ?Υ) ("Chi" . ?Χ)
-                   ;; OK
-                   ("Gamma" . ?Γ) ("Delta" . ?Δ) ("Theta" . ?Θ) ("Lambda" . ?Λ)
-                   ("Xi" . ?Ξ) ("Pi" . ?Π) ("Sigma" . ?Σ) ("Phi" . ?Φ)
-                   ("Psi" . ?Ψ) ("Omega" . ?Ω)
-                   ("alpha" . ?α) ("beta" . ?β) ("gamma" . ?γ)
-                   ("delta" . ?δ) ("epsilon" . ?ε) ("zeta" . ?ζ)
-                   ("eta" . ?η) ("theta" . ?θ) ("iota" . ?ι)
-                   ("kappa" . ?κ) ("mu" . ?μ)
-                   ("nu" . ?ν) ("xi" . ?ξ) ("omicron" . ?ο)
-                   ("pi" . ?π) ("rho" . ?ρ) ("sigma" . ?σ)
-                   ("tau" . ?τ) ("upsilon" . ?υ) ("phi" . ?φ)
-                   ("chi" . ?χ) ("psi" . ?ψ)
-                   ;; also confusing?
-                   ("lambda" . ?λ) ("omega" . ?ω)
-                   ))))
-  (add-hook 'coq-mode-hook coq-symbols-list)
-  (add-hook 'coq-goals-mode-hook coq-symbols-list)
-  )
+     (use-package company-coq
+       :commands (company-coq-mode)
+       :hook (coq-mode . company-coq-mode)
+       :config
+       (setq company-coq-disabled-features '(hello))
+       (setq coq-compile-before-require t)
+       (setq
+        coq-symbols-list
+        (lambda ()
+          (setq-local prettify-symbols-alist
+                      '(("~" . ?¬) ("empty" . ?Ø) ("*" . ?×) ("\\in" . ?\u220A)
+                        ("~exists" . ?\u2204)
+                        ("Qed." . ?■) ("Defined." . ?□)
+                        ("==>*" . (?\u27F9 (Br . Bl) ?*))
+                        ("=?" . ?\u225F) ("<=?" . (?\u2264 (Br . Bl) ??))
+                        ("\\|" . ?\u21D3)
+                        ;; ("|]\\|" . (?\u27E7 (Br . Bl) ?\u21D3))
+                        ("\\(" . ?\u27E8) ("\\)" . ?\u27E9)
+                        ("\\:" . ?\u2236) ("|=" . ?\u22A7) ("|->" . ?\u21A6)
+                        ("Gamma'" . (?Γ (Br . Bl) ?'))
+                        ("Gamma''" . (?Γ (Br . Bl) ?' (Br . Bl) ?'))
+                        ("Gamma0" . (?Γ (Br . Bl) ?0))
+                        ("Gamma1" . (?Γ (Br . Bl) ?1))
+                        ("Gamma2" . (?Γ (Br . Bl) ?2))
+                        ("sigma'" . (?σ (Br . Bl) ?'))
+                        ("sigma''" . (?σ (Br . Bl) ?' (Br . Bl) ?'))
+                        ("sigma0" . (?σ (Br . Bl) ?0))
+                        ("sigma1" . (?σ (Br . Bl) ?1))
+                        ("sigma2" . (?σ (Br . Bl) ?2))
+                        ;; same as other capital letters -> confusing
+                        ;; ("Alpha" . ?Α) ("Beta" . ?Β) ("Epsilon" . ?Ε) ("Zeta" . ?Ζ)
+                        ;; ("Eta" . ?Η) ("Iota" . ?Ι) ("Kappa" . ?Κ) ("Mu" . ?Μ)
+                        ;; ("Nu" . ?Ν) ("Omicron" . ?Ο) ("Rho" . ?Ρ) ("Tau" . ?Τ)
+                        ;; ("Upsilon" . ?Υ) ("Chi" . ?Χ)
+                        ;; OK
+                        ("Gamma" . ?Γ) ("Delta" . ?Δ) ("Theta" . ?Θ) ("Lambda" . ?Λ)
+                        ("Xi" . ?Ξ) ("Pi" . ?Π) ("Sigma" . ?Σ) ("Phi" . ?Φ)
+                        ("Psi" . ?Ψ) ("Omega" . ?Ω)
+                        ("alpha" . ?α) ("beta" . ?β) ("gamma" . ?γ)
+                        ("delta" . ?δ) ("epsilon" . ?ε) ("zeta" . ?ζ)
+                        ("eta" . ?η) ("theta" . ?θ) ("iota" . ?ι)
+                        ("kappa" . ?κ) ("mu" . ?μ)
+                        ("nu" . ?ν) ("xi" . ?ξ) ("omicron" . ?ο)
+                        ("pi" . ?π) ("rho" . ?ρ) ("sigma" . ?σ)
+                        ("tau" . ?τ) ("upsilon" . ?υ) ("phi" . ?φ)
+                        ("chi" . ?χ) ("psi" . ?ψ)
+                        ;; also confusing?
+                        ("lambda" . ?λ) ("omega" . ?ω)
+                        ))))
+       (add-hook 'coq-mode-hook coq-symbols-list)
+       (add-hook 'coq-goals-mode-hook coq-symbols-list)
+       )
 
 #+END_SRC
 
