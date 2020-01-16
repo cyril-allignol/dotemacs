@@ -536,6 +536,13 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
        (setq python-shell-interpreter "python3"))
    #+END_SRC
 
+** Smala
+   #+BEGIN_SRC emacs-lisp +n
+     (use-package smala-mode
+       :load-path "~/.emacs.d/lisp"
+       :mode ("\\.sma\\'"))
+   #+END_SRC
+
 ** BNF
 #+BEGIN_SRC emacs-lisp +n
 (use-package bnf-mode :mode "\\.bnf\\'")
