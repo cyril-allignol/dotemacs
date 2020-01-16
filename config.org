@@ -222,6 +222,13 @@
      (define-key global-map (kbd "C-x C-b") 'electric-buffer-list)
    #+END_SRC
 
+** Buffers
+   Don't ask for confirmation when killing current buffer, unless
+   there are changes:
+   #+BEGIN_SRC emacs-lisp +n
+     (global-set-key (kbd "C-x k")
+                     '(lambda () (interactive) (kill-buffer (current-buffer))))
+   #+END_SRC
 ** Mini-buffer
    I want to ignore case in the mini-buffer for filename completion:
    #+BEGIN_SRC emacs-lisp +n
