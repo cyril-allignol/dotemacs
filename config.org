@@ -590,30 +590,30 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
 ** LaTeX
    I use AucTeX with =company-mode=:
    #+BEGIN_SRC emacs-lisp +n
-(use-package latex
-  :ensure auctex
-  :mode ("\\.tex\\'" . latex-mode)
-  :bind (:map LaTeX-mode-map ("C-c l" . TeX-error-overview))
-  :init
-  (use-package company-auctex :init (company-auctex-init))
-  (add-hook 'LaTeX-mode-hook
-            (lambda ()
-              (TeX-PDF-mode)
-              (turn-on-reftex)
-              (TeX-debug-bad-boxes)
-              (TeX-debug-warnings)
-              (TeX-source-correlate-mode)
-              )
-            )
-  :config
-  (setq TeX-parse-self t) ; Enable parse on load.
-  (setq TeX-auto-save t) ; Enable parse on save.
-  (setq-default TeX-clean-confirm nil)
-  (add-hook 'TeX-language-fr-hook
-            (lambda () (ispell-change-dictionary "francais")))
-  (add-hook 'TeX-language-en-hook
-            (lambda () (ispell-change-dictionary "english")))
-  )
+     (use-package latex
+       :ensure auctex
+       :mode ("\\.tex\\'" . latex-mode)
+       :bind (:map LaTeX-mode-map ("C-c l" . TeX-error-overview))
+       :init
+       (use-package company-auctex :init (company-auctex-init))
+       (add-hook 'LaTeX-mode-hook
+                 (lambda ()
+                   (TeX-PDF-mode)
+                   (turn-on-reftex)
+                   (setq TeX-debug-bad-boxes t)
+                   (setq TeX-debug-warnings t)
+                   (TeX-source-correlate-mode)
+                   )
+                 )
+       :config
+       (setq TeX-parse-self t) ; Enable parse on load.
+       (setq TeX-auto-save t) ; Enable parse on save.
+       (setq-default TeX-clean-confirm nil)
+       (add-hook 'TeX-language-fr-hook
+                 (lambda () (ispell-change-dictionary "francais")))
+       (add-hook 'TeX-language-en-hook
+                 (lambda () (ispell-change-dictionary "english")))
+       )
 #+END_SRC
    I also use RefTeX for references management:
    #+BEGIN_SRC emacs-lisp +n
