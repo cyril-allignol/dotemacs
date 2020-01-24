@@ -617,12 +617,12 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
 #+END_SRC
    I also use RefTeX for references management:
    #+BEGIN_SRC emacs-lisp +n
-(use-package reftex
-  :defer t
-  :init
-  (setq reftex-plug-into-AUCTeX t)
-  (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
-#+END_SRC
+     (use-package reftex
+       :defer t
+       :init
+       (setq reftex-plug-into-AUCTeX t)
+       (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
+   #+END_SRC
 
 ** Watch your language!
    I use =aspell= for spelling:
