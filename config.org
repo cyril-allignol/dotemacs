@@ -201,8 +201,9 @@
        :init (which-key-mode)
        :config
        (which-key-setup-side-window-bottom)
-       (setq which-key-idle-delay 0.05)
-     )
+       (setq which-key-idle-delay 1.0)
+       (setq which-key-idle-secondary-delay 0.05)
+       )
    #+END_SRC
    I map a few function keys on navigation and compilation...
    #+BEGIN_SRC emacs-lisp +n
