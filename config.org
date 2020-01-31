@@ -294,19 +294,19 @@
         )
        )
    #+END_SRC
-** Undoing
-   I'm not particularly fond of emacs' default undo mechanism. I prefer
-   to see my undos as a tree, which I have with:
-   #+BEGIN_SRC emacs-lisp +n
-     (use-package undo-tree
-       :diminish undo-tree-mode
-       :bind* (("C-x u" . undo-tree-undo)
-               ("C-_" . undo-tree-undo)
-               ("M-m r" . undo-tree-redo)
-               ("M-m U" . undo-tree-visualize))
-       :config
-       (global-undo-tree-mode))
-   #+END_SRC
+# ** Undoing
+#    I'm not particularly fond of emacs' default undo mechanism. I prefer
+#    to see my undos as a tree, which I have with:
+#    #+BEGIN_SRC emacs-lisp +n
+#      (use-package undo-tree
+#        :diminish undo-tree-mode
+#        :bind* (("C-x u" . undo-tree-undo)
+#                ("C-_" . undo-tree-undo)
+#                ("M-m r" . undo-tree-redo)
+#                ("M-m U" . undo-tree-visualize))
+#        :init
+#        (global-undo-tree-mode))
+#    #+END_SRC
 
 ** Directory navigation
    Now and then, it is useful to navigate files in a directory tree. I do
