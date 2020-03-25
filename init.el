@@ -19,8 +19,9 @@
 ;; built-in package manager:
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (package-initialize)
 
 ;; Then install use-package if necessary, and use it:
