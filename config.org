@@ -15,7 +15,6 @@
   #+BEGIN_SRC emacs-lisp +n
     (setq custom-file (concat user-emacs-directory "/custom.el"))
     (load-file custom-file)
-    (require 'local nil t)
     (require 'private nil t)
     (setq auth-sources '((:source "~/.authinfo.gpg")))
   #+END_SRC
