@@ -81,12 +81,20 @@
    #+END_SRC
 
 ** Font
-   If available on the system, I like the "Hack" font. Otherwise I use
-   "DejaVu":
+   If available on the system, I like the "Fira Code" or "Hack"
+   fonts. Otherwise I use "DejaVu":
    #+BEGIN_SRC emacs-lisp +n
-     (if (member "Hack" (font-family-list))
-         (set-frame-font "Hack-10" nil t)
-       (set-frame-font "DejaVu Sans Mono-10" nil t))
+     (if (member "Fira Emacs" (font-family-list))
+         (progn
+           (require 'fira-code)
+           (fira-code-enable)
+           (set-frame-font "Fira Emacs-10" nil t)
+           (fira-code-mode t))
+         ;; (progn (set-frame-font "Fira Emacs" nil t)
+         ;; 	   (fira-code-mode))
+       (if (member "Hack" (font-family-list))
+           (set-frame-font "Hack-10" nil t)
+         (set-frame-font "DejaVu Sans Mono-10" nil t)))
    #+END_SRC
 
 ** Theme
