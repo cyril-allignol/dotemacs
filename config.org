@@ -497,6 +497,7 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
                         ))))
        (add-hook 'coq-mode-hook coq-symbols-list)
        (add-hook 'coq-goals-mode-hook coq-symbols-list)
+       (put 'company-coq-fold 'disabled nil)
        )
 
 #+END_SRC
