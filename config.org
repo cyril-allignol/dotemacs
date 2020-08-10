@@ -84,14 +84,13 @@
    If available on the system, I like the "Fira Code" or "Hack"
    fonts. Otherwise I use "DejaVu":
    #+BEGIN_SRC emacs-lisp +n
-     (if (member "Fira Emacs" (font-family-list))
+     (if (member "Fira Code" (font-family-list))
          (progn
-           (require 'fira-code)
-           (fira-code-enable)
-           (set-frame-font "Fira Emacs-10" nil t)
-           (fira-code-mode t))
-         ;; (progn (set-frame-font "Fira Emacs" nil t)
-         ;; 	   (fira-code-mode))
+           (use-package fira-code-mode
+             ;; :custom (fira-code-mode-disabled-ligatures '("[]" "#{" "#(" "#_" "#_(" "x")) ;; List of ligatures to turn off
+             :hook prog-mode)
+           (setq default-frame-alist '((font . "Fira Code-10"))))
+           ;; (set-frame-font "Fira Code-10" nil t))
        (if (member "Hack" (font-family-list))
            (set-frame-font "Hack-10" nil t)
          (set-frame-font "DejaVu Sans Mono-10" nil t)))
