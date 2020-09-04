@@ -567,7 +567,26 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
      (use-package python
        :mode ("\\.py\\'" . python-mode)
        :config
-       (setq python-shell-interpreter "python3"))
+       (setq python-shell-interpreter "python3")
+       (add-hook
+        'python-mode-hook
+        (lambda ()
+          (mapc (lambda (pair) (push pair prettify-symbols-alist))
+                '(;; Syntax
+                  ("def" .      #x2a0d) ;; #x2131
+                  ("not" .      #x2757)
+                  ("in" .       #x2208)
+                  ("not in" .   #x2209)
+                  ("return" .   #x27fc)
+                  ("yield" .    #x27fb)
+                  ("for" .      #x2200)
+                  ;; Base Types
+                  ("int" .      #x2124)
+                  ("float" .    #x211d)
+                  ("str" .      #x1d54a)
+                  ("True" .     #x1d54b)
+                  ("False" .    #x1d53d)))))
+       )
    #+END_SRC
 
 ** Smala
