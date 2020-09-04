@@ -87,7 +87,7 @@
      (if (member "Fira Code" (font-family-list))
          (progn
            (use-package fira-code-mode
-             ;; :custom (fira-code-mode-disabled-ligatures '("[]" "#{" "#(" "#_" "#_(" "x")) ;; List of ligatures to turn off
+             :custom (fira-code-mode-disabled-ligatures '("x")) ;; List of ligatures to turn off
              :hook prog-mode)
            (setq default-frame-alist '((font . "Fira Code-10"))))
            ;; (set-frame-font "Fira Code-10" nil t))
