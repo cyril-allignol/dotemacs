@@ -437,16 +437,6 @@
          ("C-* C-i" . mc/insert-numbers)))
 #+END_SRC
 
-** Saving/restoring session
-   Save and restore Emacs status, including buffers, point and window
-   configurations.
-  #+BEGIN_SRC emacs-lisp +n
-    (use-package desktop
-      :ensure nil
-      :hook
-      (after-init . desktop-read)
-      (after-init . desktop-save-mode))
-  #+END_SRC
 * Org
 Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]].
 #+BEGIN_SRC emacs-lisp +n
