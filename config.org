@@ -81,19 +81,17 @@
    #+END_SRC
 
 ** Font
-   If available on the system, I like the "Fira Code" or "Hack"
-   fonts. Otherwise I use "DejaVu":
+   If available on the system, I like the "Fira Code" or "Hack" fonts. Otherwise I use "DejaVu":
    #+BEGIN_SRC emacs-lisp +n
-     (if (member "Fira Code" (font-family-list))
-         (progn
-           (use-package fira-code-mode
-             :custom (fira-code-mode-disabled-ligatures '("x")) ;; List of ligatures to turn off
-             :hook prog-mode)
-           (setq default-frame-alist '((font . "Fira Code-10"))))
-           ;; (set-frame-font "Fira Code-10" nil t))
-       (if (member "Hack" (font-family-list))
-           (set-frame-font "Hack-10" nil t)
-         (set-frame-font "DejaVu Sans Mono-10" nil t)))
+     (custom-theme-set-faces
+      'user
+      '(variable-pitch ((t (:family "ETBembo" :height 160)))))
+      ;; '(variable-pitch ((t (:family "ETBookOT" :height 140)))))
+      ;; '(fixed-pitch ((t ( :family "Fira Code" :height 160)))))
+
+     (add-to-list 'default-frame-alist '(font . "Fira Code-12"))
+     ;; (add-to-list 'default-frame-alist '(font . "JetBrains Mono-11"))
+
    #+END_SRC
 
 ** Theme
