@@ -295,6 +295,11 @@
    #+END_SRC
    I use Helm for "smart" command completion:
    #+BEGIN_SRC emacs-lisp +n
+     (use-package helm-icons
+       :config
+       (helm-icons-enable)
+       (setq helm-incons-provider 'all-the-icons)
+       )
      (use-package helm-config
        :ensure helm
        :bind
