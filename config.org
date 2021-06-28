@@ -27,19 +27,6 @@
     (setq load-prefer-newer t)
   #+END_SRC
 
-* Server
-  I use the server feature of emacs to only launch one instance. Then I
-  use emacsclient to connect to it. The server is only started with the
-  first graphical emacs (thus I keep the possibility of lauching another
-  emacs process in a terminal without a warning):
-  #+BEGIN_SRC emacs-lisp +n
-    (use-package edit-server
-      :if window-system
-      :init
-      (add-hook 'after-init-hook 'server-start t)
-      (add-hook 'after-init-hook 'edit-server-start t))
-  #+END_SRC
-
 * Aesthetics
 ** Startup
    I don't need any welcome message or splash screen, just give me a
