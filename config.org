@@ -365,6 +365,12 @@
 #        (global-undo-tree-mode))
 #    #+END_SRC
 
+** Window navigation
+   Move around with M-<up>, M-<down>, M-<left> and M-<right>, using windmove (set Meta as a prefix)
+   #+begin_src emacs-lisp +n
+     (windmove-default-keybindings 'meta)
+   #+end_src
+
 ** Directory navigation
    Now and then, it is useful to navigate files in a directory tree. I do
    this with =neotree=, which I bind to =[f3]=:
