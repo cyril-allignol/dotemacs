@@ -544,7 +544,17 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
     :hook (org-mode . org-superstar-mode)
     )
 #+END_SRC
+
 * Programming
+** Compilation
+   Automatically: kill existing compilation process, save buffers, jump to first
+   error
+#+BEGIN_SRC emacs-lisp +n
+  (setq-default
+   compilation-always-kill t
+   compilation-ask-about-save nil
+   compilation-auto-jump-to-first-error t)
+#+END_SRC
 ** Git
    I use Magit for version control management with diff-hl as a diff
    tool:
