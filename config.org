@@ -187,6 +187,7 @@
              doom-modeline-icon t
              doom-modeline-major-mode-icon t
              doom-modeline-major-mode-color-icon t
+             doom-modeline-buffer-encoding nil
              doom-modeline-env-python-executable "python3"
              )
        )
