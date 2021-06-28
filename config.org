@@ -621,6 +621,14 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
                         ;; also confusing?
                         ("lambda" . ?λ) ("omega" . ?ω)
                         ))))
+       (setq company-coq-autocomplete-modules nil)
+       (setq company-coq-autocomplete-context nil)
+       (setq company-coq-autocomplete-symbols nil)
+       (setq company-coq-autocomplete-block-end nil)
+       (setq company-coq-autocomplete-search-results nil)
+       (setq company-coq-completion-predicate nil)
+       (setq company-idle-delay nil ;; on-demand completion
+             company-minimum-prefix-length 0)
        (add-hook 'coq-mode-hook coq-symbols-list)
        (add-hook 'coq-goals-mode-hook coq-symbols-list)
        (put 'company-coq-fold 'disabled nil)
