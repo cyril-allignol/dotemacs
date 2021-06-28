@@ -735,14 +735,15 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
 (use-package bnf-mode :mode "\\.bnf\\'")
 #+END_SRC
 * Writing
-  I require left justification with automatic line breaking for anything
-  in text mode:
+  In text mode (and derived) I use visual-line-mode to wrap lines, in cunjunction to visual-fill-column-mode to bound the length of a visual line:
   #+BEGIN_SRC emacs-lisp +n
-(add-hook 'text-mode-hook
-          (lambda ()
-            (auto-fill-mode t)
-            (setq default-justification 'left)))
+    (add-hook 'text-mode-hook
+              (lambda ()
+                (visual-line-mode t)
+                (visual-fill-column-mode t)
+                ))
 #+END_SRC
+
 ** Focus on writing
    I've mapped =[f12]= with =writeroom-mode=, so I can switch quickly to
    a quiet, fullscreen environment with no distraction:
