@@ -13,3 +13,5 @@ session.*
 /forge-database.sqlite
 games/**
 /srecode-map.el
+url/**
+tramp
