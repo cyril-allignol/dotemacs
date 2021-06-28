@@ -581,7 +581,8 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
         coq-symbols-list
         (lambda ()
           (setq-local prettify-symbols-alist
-                      '(("~" . ?¬) ("empty" . ?Ø) ("*" . ?×) ("\\in" . ?\u220A)
+                      '((":=" . ?≜) ("Proof." . ?∵)
+                        ("~" . ?¬) ("empty" . ?Ø) ("*" . ?×) ("\\in" . ?\u220A)
                         ("~exists" . ?\u2204)
                         ("Qed." . ?■) ("Defined." . ?□)
                         ("==>*" . (?\u27F9 (Br . Bl) ?*))
