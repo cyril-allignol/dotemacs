@@ -489,8 +489,20 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
     (setq org-src-fontify-natively t
           org-src-tab-acts-natively t
           org-src-window-setup 'current-window
-          org-ellipsis "⤵"
+          org-startup-indented t
+          org-fontify-done-headline t
+          org-hide-emphasis-markers t
+          org-ellipsis " "
           org-pretty-entities t)
+
+    (add-hook 'org-mode-hook
+              (lambda ()
+                "Beautify Org Checkbox Symbol"
+                (push '("[ ]" .  "") prettify-symbols-alist) ;; "☐"
+                (push '("[X]" . "") prettify-symbols-alist) ;;  "☑"
+                (push '("[-]" . "❍") prettify-symbols-alist)
+                (prettify-symbols-mode)))
+
     (setq org-agenda-files '("~/Cloud/Org")
           org-default-notes-file "~/Cloud/Org/refile.org"
           org-agenda-include-diary nil
@@ -520,12 +532,17 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
 
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((emacs-lisp . nil)
+   '((emacs-lisp . t)
      (ocaml . t)
      (python . t)
      (R . t)))
   (setq org-babel-python-command "python3")
   (setq org-confirm-babel-evaluate nil)
+
+  (use-package org-superstar
+    :after org
+    :hook (org-mode . org-superstar-mode)
+    )
 #+END_SRC
 * Programming
 ** Git
