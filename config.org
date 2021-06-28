@@ -193,6 +193,13 @@
        )
    #+END_SRC
 
+   To hide the modeline:
+   #+BEGIN_SRC emacs-lisp +n
+     (use-package hide-mode-line
+       :bind (("C-x _" . hide-mode-line-mode))
+       )
+   #+END_SRC
+
 * General behavior and tools
 ** Whitespace management
    I hate trailing white space, so I remove it on save:
