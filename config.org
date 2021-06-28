@@ -471,7 +471,7 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
     (setq org-todo-keyword-faces
           '(("WAITING" . org-warning) ("DELEGATED" . org-wait)))
     (setq org-enforce-todo-dependencies t)
-    (setq org-log-done 'time)
+    ;; (setq org-log-done 'time)
     (setq org-directory "~/Cloud/Org")
     (setq org-capture-templates
           (quote (("t" "Task" entry (file "~/Cloud/Org/refile.org")
