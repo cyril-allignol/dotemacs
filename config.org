@@ -1,5 +1,4 @@
-#+TITLE: Emacs configuration
-#+LANGUAGE: en
+#+title: Emacs configuration
 
 * Paths
   Set the load path for local packages:
@@ -58,9 +57,9 @@
 ** Spaaaace
    I also don't need any menu/tool/scroll bars:
    #+BEGIN_SRC emacs-lisp +n
-     (menu-bar-mode 0)
-     (tool-bar-mode 0)
-     (scroll-bar-mode 0)
+     (menu-bar-mode -1)
+     (tool-bar-mode -1)
+     (scroll-bar-mode -1)
    #+END_SRC
 
 ** Where am I
