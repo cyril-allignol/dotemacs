@@ -472,6 +472,8 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
     (org-hide-emphasis-markers t "Markup symbols are hidden")
     (org-ellipsis " " "Unfold marker")
     (org-pretty-entities t "Show UTF8 symbols")
+    (org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+    (org-image-actual-width nil "Enable resizing image inline preview")
     :init
     (setq org-todo-keywords
           '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)")
@@ -512,6 +514,7 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
     (add-to-list 'org-latex-default-packages-alist '("mathletters" "ucs"))
     (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
     (add-to-list 'org-latex-packages-alist '("" "minted"))
+    (add-to-list 'org-latex-packages-alist '("" "mathpazo"))
     (setq org-latex-listings 'minted
           org-latex-pdf-process
           '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
