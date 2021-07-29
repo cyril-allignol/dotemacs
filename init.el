@@ -12,7 +12,7 @@
                    gc-cons-percentage 0.1)
              (garbage-collect)) t)
 
-(load-file "~/.emacs.d/local.el")
+(load "~/.emacs.d/local")
 
 ;; I don't use system packages, and manage emacs-specific packages with
 ;; use-package. First set-up GNU and MELPA repositories and initialize

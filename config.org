@@ -117,13 +117,11 @@ Fira Code supports some ligatures, which I really enjoy in programming modes (FI
     )
 #+end_src
 
-
 * Other configuration files
 
-I have some machine-local configurations in =local.el=, private non-sensitive information in =private.el= and authentication information in the encrypted =~/.authinfo.gpg= (this is the default):
+I have some machine-local configurations in =local.el= (loaded from =init.el=), private non-sensitive information in =private.el= and authentication information in the encrypted =~/.authinfo.gpg= (this is the default):
 #+begin_src emacs-lisp +n
-  (require 'private nil t)
-  (require 'local nil t)
+  (load "~/.emacs.d/private")
 #+end_src
 
 * Package management
