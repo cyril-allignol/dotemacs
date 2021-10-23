@@ -8,19 +8,18 @@ This section configures Emacs' built-in features:
 3. smooth scrolling instead of page-by-page (lines [[(scroll_begin)]] to [[(scroll_end)]])
 4. use spaces instead of tabs
 5. set frames and buffers to be 80 characters wide
-6. don't ask for confirmation when killing current buffer, unless there are changes
-and general key-bindings:
+6. don't ask for confirmation when killing current buffer, unless there are changes and general key-bindings:
 - =[escape]= escapes all
 - map =[f1]= and =[f2]= to go to column/line
 - map =[²]= completion /via/ dabbrev
 #+begin_src emacs-lisp +n
   (use-package emacs
     :bind
-    ([f1] . goto-char)
-    ([f2] . goto-line)
-    ([?²] . dabbrev-expand)
-    ("C-x k" . (lambda () (interactive) (kill-buffer (current-buffer))))
     ([escape] . keyboard-escape-quit)
+    ([f1]     . goto-char)
+    ([f2]     . goto-line)
+    ([?²]     . dabbrev-expand)
+    ("C-x k"  . (lambda () (interactive) (kill-buffer (current-buffer))))
     :custom
     (load-path (cons "~/.emacs.d/lisp" load-path) "Path for local packages")
     (load-prefer-newer t)
@@ -128,15 +127,18 @@ I use fancy icons in several places (modeline, Ivy, Org bullets, etc.).
 #+end_src
 
 * Package management
+
 Automatically trigger compilation when loading a new package:
 #+begin_src emacs-lisp +n
   (use-package auto-compile :config (auto-compile-on-load-mode))
 #+end_src
+
 If system packages are missing, install them:
 #+begin_src emacs-lisp +n
   (use-package system-packages :ensure t)
   (use-package use-package-ensure-system-package :ensure t)
 #+end_src
+
 Use =paradox= instead of the default package management interface:
 #+begin_src emacs-lisp +n
   (use-package paradox
@@ -161,20 +163,22 @@ Also, I don't need the tooltips, so let's remove them as well.
 #+end_src
 
 ** Where am I
-To navigate, I like to see line and column numbers, as well as the current line:
+
+To navigate, I like to see line numbers (included in my modeline), as well as the current line in programming modes:
 #+begin_src emacs-lisp +n
   ;; (line-number-mode t)
   ;; (column-number-mode t)
   (use-package hl-line :hook (prog-mode . hl-line-mode))
 #+end_src
-I want paren matching information:
+
+I want a (light) paren matching information:
 #+begin_src emacs-lisp +n
   (use-package paren :config (show-paren-mode t))
 #+end_src
 
 ** Theme
-I use doom themes, with a theme switching scheme (taken [[https://github.com/habamax/.emacs.d/blob/master/lisp/haba-appearance.el][here]]) to
-toggle between light and dark in a keystroke:
+
+I mainly use Doom themes, and define light and dark variants which I change system-wide by a call to emacsclient:
 #+begin_src emacs-lisp +n
   (use-package doom-themes
     :ensure t
@@ -221,7 +225,7 @@ To get along the theme, I use the Doom modeline with fancy icons:
     )
 #+end_src
 
-To hide the modeline:
+=[C-x _]= to hide the modeline:
 #+begin_src emacs-lisp +n
   (use-package hide-mode-line
     :ensure t
@@ -230,8 +234,8 @@ To hide the modeline:
 #+end_src
 
 * General behavior and tools
-
 ** Files
+
 I don't want emacs to fill my directories with save files, so I store them to a spacific place (/e.g./: =~/.emacs.d/backups=). Also, I hate trailing white space, so I remove it on save:
 #+begin_src emacs-lisp +n
   (use-package files
@@ -252,6 +256,7 @@ I don't want emacs to fill my directories with save files, so I store them to a 
 #+end_src
 
 ** History
+
 I keep an history of recent files/commands:
 #+begin_src emacs-lisp +n
   (use-package savehist
@@ -264,6 +269,7 @@ I keep an history of recent files/commands:
 #+end_src
 
 ** Key bindings
+
 Making it easier to discover Emacs key presses.
 #+begin_src emacs-lisp +n
   (use-package which-key
@@ -279,7 +285,8 @@ Making it easier to discover Emacs key presses.
 #+end_src
 
 ** Mini-buffer
-I want to ignore case in the mini-buffer for filename completion:
+
+I want to ignore case in the mini-buffer for filename completion (this might become obsolete with the use of Ivy):
 #+begin_src emacs-lisp +n
   (use-package minibuffer
     :custom
@@ -334,7 +341,8 @@ Making Ivy lists a bit more informative:
 #+end_src
 
 ** Completion
-I use Company for completion, with an on-demand setup:
+
+I use Company for completion, with an on-demand setup bound to =[C-<tab>]=:
 #+begin_src emacs-lisp +n
   (use-package company
     :ensure t
@@ -352,6 +360,7 @@ I use Company for completion, with an on-demand setup:
 #+end_src
 
 ** Useful shortcuts with Crux
+
 The Crux package provides some useful functions for line, buffer of file manipulation. I map a few of those functions to the suggested key combinations:
 #+begin_src emacs-lisp +n
   (use-package crux
@@ -365,7 +374,8 @@ The Crux package provides some useful functions for line, buffer of file manipul
 #+end_src
 
 ** Window navigation
-Move around with M-<up>, M-<down>, M-<left> and M-<right>, using windmove (set Meta as a prefix)
+
+Move around with M-<up>, M-<down>, M-<left> and M-<right>, using windmove (this does not work in Org mode since those keybindings are used to move sections around):
 #+begin_src emacs-lisp +n
   (use-package windmove
     :config (windmove-default-keybindings 'meta)
@@ -373,6 +383,7 @@ Move around with M-<up>, M-<down>, M-<left> and M-<right>, using windmove (set M
 #+end_src
 
 ** Parentheses navigation
+
 Using smartparens to navigate s-expressions:
 #+begin_src emacs-lisp +n
   (use-package smartparens-config
@@ -427,7 +438,8 @@ Using smartparens to navigate s-expressions:
 #+end_src
 
 ** Directory navigation
-Now and then, it is useful to navigate files in a directory tree. I do this with =neotree=, which I bind to =[f3]=:
+
+Now and then, it is useful to navigate files in a directory tree. I do this with =neotree=, which I bind to =[f3]= (not so useful, consider removing it):
 #+begin_src emacs-lisp +n
   (use-package neotree
     :ensure t
@@ -445,6 +457,7 @@ Set up dired to be used as a file chooser for e-mail attachments:
 #+end_src
 
 ** Cursors
+
 In some occasions, like refactoring, having multiple cursors visually helps:
 #+begin_src emacs-lisp +n
   (use-package multiple-cursors
@@ -666,7 +679,10 @@ Show hidden symbols under cursor:
 #+end_src
 
 ** Compilation
-Automatically: kill existing compilation process, save buffers, jump to first error
+
+Automatically kill existing compilation process, save buffers, jump to first error. Keybindings:
+- =[f6]= to compile;
+- =[f8]= and =[⇑-f8]= to navigate errors.
 #+begin_src emacs-lisp +n
   (use-package compile
     :bind
@@ -678,7 +694,9 @@ Automatically: kill existing compilation process, save buffers, jump to first er
     (compilation-ask-about-save nil)
     (compilation-auto-jump-to-first-error t))
 #+end_src
+
 ** Git
+
 I use Magit for version control management with diff-hl as a diff tool:
 #+begin_src emacs-lisp +n
   (use-package magit
@@ -695,6 +713,7 @@ I use Magit for version control management with diff-hl as a diff tool:
 #+end_src
 
 ** Coq
+
 For interactive Coq proving, I use Proof General:
 #+begin_src emacs-lisp +n
   (use-package proof-general
@@ -704,6 +723,7 @@ For interactive Coq proving, I use Proof General:
     (proof-sticky-errors t)
     )
 #+end_src
+
 For convenience, I also use =company-coq=, with an extended symbols list:
 #+begin_src emacs-lisp +n
   (use-package company-coq
@@ -763,6 +783,7 @@ For convenience, I also use =company-coq=, with an extended symbols list:
 #+end_src
 
 ** OCaml
+
 For OCaml, I use a combination of Tuareg, Merlin (with company) and utop. All of this being configured to work with my opam-based OCaml distribution:
 #+begin_src emacs-lisp +n
   (use-package utop
@@ -815,6 +836,7 @@ For OCaml, I use a combination of Tuareg, Merlin (with company) and utop. All of
 #+end_src
 
 ** Python
+
 Here I just set-up the interpreter to be Python 3 (not necessary on most recent Linux systems) and a few symbols:
 #+begin_src emacs-lisp +n
   (use-package python
@@ -844,6 +866,7 @@ Here I just set-up the interpreter to be Python 3 (not necessary on most recent 
 #+end_src
 
 ** Smala
+
 #+begin_src emacs-lisp +n
   (use-package smala-mode :mode "\\.sma\\'")
 #+end_src
@@ -874,6 +897,7 @@ Better help for elisp:
 #+end_src
 
 * Writing
+
 In text mode (and derived) I use visual-line-mode to wrap lines, in cunjunction to visual-fill-column-mode to bound the length of a visual line:
 #+begin_src emacs-lisp +n
   (use-package text-mode
@@ -917,6 +941,7 @@ I use AucTeX with =company-mode=:
 
   (use-package company-auctex :init (company-auctex-init))
 #+end_src
+
 I also use RefTeX for references management:
 #+begin_src emacs-lisp +n
   (use-package reftex
@@ -927,12 +952,14 @@ I also use RefTeX for references management:
 #+end_src
 
 ** Watch your language!
+
 I use =aspell= for spelling:
 #+begin_src emacs-lisp +n
   (use-package ispell
     :custom
     (ispell-program-name "aspell"))
 #+end_src
+
 Also, I'm currently trying =writegood= for style checking:
 #+begin_src emacs-lisp +n
   (use-package writegood-mode
@@ -942,6 +969,7 @@ Also, I'm currently trying =writegood= for style checking:
     ("C-c C-g g" . writegood-grade-level)
     ("C-c C-g e" . writegood-reading-ease))
 #+end_src
+
 Search Thesaurus for synonyms:
 #+begin_src emacs-lisp +n
   (use-package synosaurus
@@ -958,6 +986,7 @@ Search Thesaurus for synonyms:
 #+end_src
 
 ** PDF
+
 I sometimes like to open PDFs directly in emacs, which I do with PDF-tools:
 #+begin_src emacs-lisp +n
   (use-package pdf-view
@@ -978,7 +1007,7 @@ Composing using message mode:
   (use-package message
     :custom
     (message-kill-buffer-on-exit t "Kill the compose buffer after sending")
-    (message-send-mail-function 'sendmail-send-it "Send using the sendmail-program")
+    (message-send-mail-function 'sendmail-send-it "Send using sendmail")
     (message-sendmail-envelope-from 'header "Select right sender from context")
     )
 #+end_src
@@ -1087,17 +1116,24 @@ Display unread messages in the modeline:
 
 * Other specific tools
 ** Passwords
+
+Utilities to edit and retrieve from password-store:
 #+begin_src emacs-lisp +n
   (use-package pass :ensure t)
+  (use-package ivy-pass :ensure t)
 #+end_src
 
 ** Configuration files
+
+Modes for system files:
 #+begin_src emacs-lisp +n
   (use-package apt-sources-list :ensure t)
   (use-package ssh-config-mode :ensure t)
 #+end_src
 
 ** Finance
+
+Use ledger-mode for my finances with hledger (ledger-mode is quite richer than hledger-mode at the time of writing, but I prefer the hledger tool):
 #+begin_src emacs-lisp +n
   (use-package ledger-mode
     :ensure t
@@ -1114,11 +1150,14 @@ Display unread messages in the modeline:
 #+end_src
 
 ** CSV
+
+Occasionally have to handle CSV files, so better do it in emacs:
 #+begin_src emacs-lisp +n
   (use-package csv-mode :ensure t :mode "\\.[Cc][Ss][Vv]\\'")
 #+end_src
 
 ** Window$ files
+
 The following functions handle DOS-style end of lines:
 #+begin_src emacs-lisp +n
   (defun dos-to-unix ()
