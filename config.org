@@ -383,52 +383,55 @@ Move around with M-<up>, M-<down>, M-<left> and M-<right>, using windmove (set M
 ** Parentheses navigation
 Using smartparens to navigate s-expressions:
 #+begin_src emacs-lisp +n
-  (use-package smartparens
-    :ensure t
+  (use-package smartparens-config
+    :ensure smartparens
     :commands
-    (smartparens-mode
-     sp-with-modes
-     sp-local-pair
-     sp-pair)
+    (smartparens-mode sp-with-modes sp-local-pair sp-pair)
     :hook ((conf-mode text-mode prog-mode) . smartparens-mode)
     :config
-    (use-package smartparens-config
-      :ensure nil
-      :demand t)
     (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
-    :bind (:map sp-keymap
-                ("C-M-f" . sp-forward-sexp)
-                ("C-M-b" . sp-backward-sexp)
-                )
+    :bind
+    (:map sp-keymap
+          ("C-M-f"     . sp-forward-sexp)
+          ("C-M-b"     . sp-backward-sexp)
+          ("C-F"       . sp-forward-symbol)
+          ("C-B"       . sp-backward-symbol)
+          ("C-M-n"     . sp-next-sexp)
+          ("C-M-p"     . sp-previous-sexp)
+          ("C-M-a"     . sp-beginning-of-sexp)
+          ("C-M-e"     . sp-end-of-sexp)
+          ("C-M-k"     . sp-kill-sexp)
+          ("C-M-w"     . sp-copy-sexp)
+          ("C-c s u"   . sp-up-sexp)
+          ("C-c s d"   . sp-down-sexp)
+          ("C-c s t"   . sp-prefix-tag-object)
+          ("C-c s p"   . sp-prefix-pair-object)
+          ("C-c s c"   . sp-convolute-sexp)
+          ("C-c s a"   . sp-absorb-sexp)
+          ("C-c s e"   . sp-emit-sexp)
+          ("C-c s p"   . sp-add-to-previous-sexp)
+          ("C-c s n"   . sp-add-to-next-sexp)
+          ("C-c s j"   . sp-join-sexp)
+          ("C-c s s"   . sp-split-sexp)
+          ("C-c s ("   . sp-wrap-round)
+          ("C-c s ["   . sp-wrap-square)
+          ("C-c s {"   . sp-wrap-curly)
+          ("C-c ("     . sp-wrap-round)
+          ("C-c ["     . sp-wrap-square)
+          ("C-c {"     . sp-wrap-curly)
+          ("M-("       . sp-backward-unwrap-sexp)
+          ("M-)"       . sp-unwrap-sexp)
+          ("C-M-right" . sp-forward-slurp-sexp)
+          ("C-s-right" . sp-forward-barf-sexp)
+          ("C-M-left"  . sp-backward-slurp-sexp)
+          ("C-s-left"  . sp-backward-barf-sexp)
+          )
     :diminish smartparens-mode)
-    ;; (general-define-key
-    ;;  :keymaps 'sp-keymap
-    ;;  "M-F" 'sp-forward-symbol
-    ;;  "M-B" 'sp-backward-symbol
-    ;;  "C-M-k" 'sp-kill-sexp
-    ;;  "C-M-w" 'sp-copy-sexp
     ;;  "C-M-t" 'sp-transpose-sexp
-    ;;  "M-<left>" 'sp-forward-slurp-sexp
-    ;;  "C-M-<left>" 'sp-forward-barf-sexp
-    ;;  "M-<right>" 'sp-backward-slurp-sexp
-    ;;  "C-M-<right>" 'sp-backward-barf-sexp
     ;;  "M-D" 'sp-splice-sexp
     ;;  "C-M-[" 'sp-select-previous-thing
     ;;  "C-M-]" 'sp-select-next-thing
-    ;;  "C-c s u" 'sp-up-sexp
-    ;;  "C-c s d" 'sp-down-sexp
-    ;;  "C-c s t" 'sp-prefix-tag-object
-    ;;  "C-c s p" 'sp-prefix-pair-object
-    ;;  "C-c s c" 'sp-convolute-sexp
-    ;;  "C-c s a" 'sp-absorb-sexp
-    ;;  "C-c s e" 'sp-emit-sexp
-    ;;  "C-c s p" 'sp-add-to-previous-sexp
-    ;;  "C-c s n" 'sp-add-to-next-sexp
-    ;;  "C-c s j" 'sp-join-sexp
-    ;;  "C-c s s" 'sp-split-sexp
-    ;;  "C-c s (" 'sp-wrap-round
-    ;;  "C-c s [" 'sp-wrap-square
-    ;;  "C-c s {" 'sp-wrap-curly)
+
 #+end_src
 
 ** Directory navigation
