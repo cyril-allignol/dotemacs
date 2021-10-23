@@ -501,7 +501,8 @@ Quickly get the boiler-plate code by using code snippets:
 #+end_src
 
 * Org
-Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]].
+
+Define some prettification symbols for todos and blocks:
 #+begin_src emacs-lisp +n
   (defun org-pretty-marking ()
     "Beautify Org structure"
@@ -518,6 +519,8 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
     )
 #+end_src
 
+Main Org-mode setup:
+#+begin_src emacs-lisp +n
   (use-package org
     :bind
     (("C-c l" . org-store-link)
@@ -543,40 +546,23 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
        (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")))
     (org-todo-keyword-faces
      '(("WAITING" . org-warning) ("HOLD" . org-warning)))
+    (org-enforce-todo-dependencies t)
+    ;; (org-log-done 'time)
+    (org-directory "~/cloud/org")
+    (org-agenda-files '("~/cloud/org"))
+    (org-default-notes-file "~/cloud/org/refile.org")
+    (org-agenda-include-diary nil)
+    (org-agenda-diary-file "~/cloud/org/diary.org")
+    (org-refile-targets (quote ((nil :maxlevel . 4)
+                                (org-agenda-files :maxlevel . 4))))
+    (org-refile-allow-creating-parent-nodes (quote confirm))
+    (org-refile-use-outline-path t)
+    (org-outline-path-complete-in-steps nil)
     :init
-    (setq org-enforce-todo-dependencies t)
-    ;; (setq org-log-done 'time)
-    (setq org-directory "~/Cloud/Org")
-    (setq org-capture-templates
-          (quote (("t" "Task" entry (file "~/Cloud/Org/refile.org")
-                   "* TODO %?\n%U\n%a\n" :empty-lines 1)
-                  ("n" "Note" entry (file "~/Cloud/Org/refile.org")
-                   "* %? :NOTE:\n%U\n%a\n" :empty-lines 1)
-                  ("j" "Journal" entry (file+datetree "~/Cloud/Org/journal.org")
-                   "* %?\n%U\n" :empty-lines 1)
-                  ("m" "Meeting" entry (file "~/Cloud/Org/refile.org")
-                   "* MEETING with %? :MEETING:\n%U"
-                   :clock-in t :clock-resume t :empty-lines 1)
-                  ("p" "Phone call" entry (file "~/Cloud/Org/refile.org")
-                   "* PHONE CALL with %? :PHONE:\n%U"
-                   :clock-in t :clock-resume t :empty-lines 1))))
-
-    (setq org-agenda-files '("~/Cloud/Org")
-          org-default-notes-file "~/Cloud/Org/refile.org"
-          org-agenda-include-diary nil
-          org-agenda-diary-file "~/Cloud/Org/diary.org"
-          org-agenda-ndays 10
-          org-agenda-start-on-weekday nil
-          )
-    (setq org-refile-targets (quote ((nil :maxlevel . 4)
-                                     (org-agenda-files :maxlevel . 4)))
-          org-refile-allow-creating-parent-nodes (quote confirm)
-          org-refile-use-outline-path t
-          org-outline-path-complete-in-steps nil
-          )
-    (use-package ox-latex)
-    (add-to-list 'org-latex-default-packages-alist '("mathletters" "ucs"))
+    (setq org-agenda-ndays 10
+          org-agenda-start-on-weekday nil)
     (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
+    (add-to-list 'org-latex-default-packages-alist '("mathletters" "ucs"))
     (add-to-list 'org-latex-packages-alist '("" "minted"))
     (add-to-list 'org-latex-packages-alist '("" "mathpazo"))
     (setq org-latex-listings 'minted
@@ -585,10 +571,36 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
             "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f")
           )
     )
+#+end_src
 
+Capture templates are taken from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]].
+#+begin_src emacs-lisp +n
+  (use-package org-capture
+    :custom
+    (org-capture-templates
+     (quote (("t" "Task" entry (file "~/cloud/org/refile.org")
+              "* TODO %?\n%U\n%a\n" :empty-lines 1)
+             ("n" "Note" entry (file "~/cloud/org/refile.org")
+              "* %? :NOTE:\n%U\n%a\n" :empty-lines 1)
+             ("j" "Journal" entry (file+datetree "~/cloud/org/journal.org")
+              "* %?\n%U\n" :empty-lines 1)
+             ("m" "Meeting" entry (file "~/cloud/org/refile.org")
+              "* MEETING with %? :MEETING:\n%U"
+              :clock-in t :clock-resume t :empty-lines 1)
+             ("p" "Phone call" entry (file "~/cloud/org/refile.org")
+              "* PHONE CALL with %? :PHONE:\n%U"
+              :clock-in t :clock-resume t :empty-lines 1))))
+    )
+#+end_src
+
+Holidays where I live:
+#+begin_src emacs-lisp +n
   (use-package french-holidays)
   (setq calendar-holidays holiday-french-holidays)
+#+end_src
 
+Code blocks:
+#+begin_src emacs-lisp +n
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
@@ -597,7 +609,10 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
      (R . t)))
   (setq org-babel-python-command "python3")
   (setq org-confirm-babel-evaluate nil)
+#+end_src
 
+Prettify todo bullets and remove heading stars:
+#+begin_src emacs-lisp +n
   (use-package org-superstar
     :ensure t
     :after org
@@ -614,6 +629,8 @@ Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]]
     (org-superstar-special-todo-items t)
     (org-superstar-leading-bullet ?\s)
     )
+#+end_src
+
     )
 #+end_src
 
