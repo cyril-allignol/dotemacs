@@ -445,6 +445,13 @@ Now and then, it is useful to navigate files in a directory tree. I do this with
     )
 #+end_src
 
+Set up dired to be used as a file chooser for e-mail attachments:
+#+begin_src emacs-lisp +n
+  (use-package dired
+    :hook (dired-mode . turn-on-gnus-dired-mode)
+    )
+#+end_src
+
 ** Cursors
 In some occasions, like refactoring, having multiple cursors visually helps:
 #+begin_src emacs-lisp +n
