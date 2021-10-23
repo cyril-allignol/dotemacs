@@ -158,12 +158,14 @@ Use =paradox= instead of the default package management interface:
 Cleaner frames by:
 - removing menu bar and tool bar;
 - removing visual scroll bar;
+- making the fringe a bit larger to have some room on the sides.
 Also, I don't need the tooltips, so let's remove them as well.
 #+begin_src emacs-lisp +n
   (use-package menu-bar :custom (menu-bar-mode nil))
   (use-package tool-bar :custom (tool-bar-mode nil))
   (use-package scroll-bar :custom (scroll-bar-mode nil))
   (use-package tooltip :custom (tooltip-mode nil))
+  (use-package fringe :config (set-fringe-mode 15))
 #+end_src
 
 ** Where am I
