@@ -1020,17 +1020,6 @@ Main mu4e configuration:
     (mu4e-update-interval 300 "Sync interval (seconds)")
     (mu4e-attachment-dir "~/.mail/attachments" "Where to save attachments")
     (mu4e-change-filenames-when-moving t "Needed for mbsync")
-    (mu4e-user-mail-address-list '("cyril.allignol@enac.fr"))
-    (mu4e-headers-fields
-     '( (:human-date     .  15)    ;; alternatively, use :human-date
-        (:flags          .   5)
-        (:from           .  22)
-        (:thread-subject . nil)))
-    (mu4e-maildir-shortcuts
-     '(("/enac/INBOX" . ?i)
-       ("/enac/Sent" . ?s)
-       ("/enac/Nicolas Nalpon" . ?n)
-       ))
     (mu4e-compose-signature-auto-include nil "Input signature on demand only (C-c C-w)")
     (mu4e-context-policy 'pick-first "Choose the first defined context as default")
     (mu4e-confirm-quit nil "Quit mu4e without asking for confirmation")
@@ -1038,6 +1027,8 @@ Main mu4e configuration:
     (setq mu4e-main-buffer-name "*Mail*")
     )
 #+end_src
+
+Contexts for multiple accounts are defined in my =private.el=.
 
 Make the header view fancier:
 #+begin_src emacs-lisp +n
