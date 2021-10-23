@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: __hash__
+# key: hash
+# group: dunder methods
+# --
+def __hash__(self):
+    return hash(self.$1${2:, others})

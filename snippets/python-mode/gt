@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: __gt__
+# key: gt
+# group: dunder methods
+# --
+def __gt__(self, other):
+    return self.$1 > other.$1

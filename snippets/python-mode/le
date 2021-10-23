@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: __le__
+# key: le
+# group: dunder methods
+# --
+def __le__(self, other):
+    return self.$1 <= other.$1

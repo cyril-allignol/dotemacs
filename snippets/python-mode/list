@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: list
+# key: li
+# group : definitions
+# --
+[${1:f(elt)} for ${2:elt} in ${3:iterable}]
+$0
