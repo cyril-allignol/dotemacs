@@ -1068,7 +1068,21 @@ Make the header view fancier:
     )
 #+end_src
 
+Folding in header view, thanks to Nicolas Rougier:
+#+begin_src emacs-lisp +n
+  (use-package mu4e-thread-folding
+    :hook (mu4e-headers-mode . mu4e-thread-folding-mode)
+    :custom
+    (mu4e-thread-folding-root-folded-prefix-string " ▸")
+    (mu4e-thread-folding-root-unfolded-prefix-string " ▾")
+    (mu4e-thread-folding-default-view 'folded)
+    :config
+    (add-to-list 'mu4e-header-info-custom
+                 '(:empty . (:name "Empty"
+                                   :shortname "    "
+                                   :function (lambda (msg) "  "))))
     )
+#+end_src
 
 Display unread messages in the modeline:
 #+begin_src emacs-lisp +n
