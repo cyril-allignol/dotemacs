@@ -1036,6 +1036,44 @@ Main mu4e configuration:
           mu4e-main-buffer-hide-personal-addresses t)
 #+end_src
 
+Make the header view fancier:
+#+begin_src emacs-lisp +n
+  (use-package mu4e-headers
+    :after mu4e
+    :custom
+    (mu4e-headers-fields '(;;(:empty         .   0)
+                           ;; (:mailing-list  .   7)
+                           ;; (:subject       .  42)
+                           (:thread-subject .  42)
+                           (:from           .  22)
+                           (:human-date     .  10)
+                           (:flags          .   4)
+                           ))
+    :config
+    (setq mu4e-headers-draft-mark     '("D" . "")
+          mu4e-headers-flagged-mark   '("F" . "")
+          mu4e-headers-new-mark       '("N" . "")
+          mu4e-headers-passed-mark    '("P" . "")
+          mu4e-headers-replied-mark   '("R" . "")
+          mu4e-headers-seen-mark      '("S" . "")
+          mu4e-headers-trashed-mark   '("T" . "")
+          mu4e-headers-attach-mark    '("a" . "")
+          mu4e-headers-encrypted-mark '("x" . "")
+          mu4e-headers-signed-mark    '("s" . "")
+          mu4e-headers-unread-mark    '("u" . "")
+          )
+    (setq mu4e-headers-thread-root-prefix          '("" . "")
+          mu4e-headers-thread-first-child-prefix   '("| " . "| ")
+          mu4e-headers-thread-child-prefix         '("| " . "| ")
+          mu4e-headers-thread-last-child-prefix    '("| " . "| ")
+          mu4e-headers-thread-connection-prefix    '("| " . "| ")
+          mu4e-headers-thread-blank-prefix         '(""   . "")
+          mu4e-headers-thread-orphan-prefix        '(""   . "")
+          mu4e-headers-thread-single-orphan-prefix '("| " . "| ")
+          mu4e-headers-thread-duplicate-prefix     '("="  . "="))
+    )
+#+end_src
+
     )
 
 Display unread messages in the modeline:
