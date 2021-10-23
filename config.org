@@ -874,14 +874,18 @@ In text mode (and derived) I use visual-line-mode to wrap lines, in cunjunction 
 #+end_src
 
 ** Focus on writing
+
 I've mapped =[f12]= with =writeroom-mode=, so I can switch quickly to a quiet, fullscreen environment with no distraction:
 #+begin_src emacs-lisp +n
   (use-package writeroom
     :ensure writeroom-mode
-    :bind ([f12] . writeroom-mode))
+    :bind ([f12] . writeroom-mode)
+    :custom (writeroom-width 90)
+    )
 #+end_src
 
 ** LaTeX
+
 I use AucTeX with =company-mode=:
 #+begin_src emacs-lisp +n
   (use-package latex
