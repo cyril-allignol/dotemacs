@@ -59,25 +59,19 @@ I don't store customizations. Also, don't ask for confirmation when loading a th
 
 * Fonts
 
-If available on the system, I like the "Fira Code" or "Hack" fonts. Otherwise I use "DejaVu". For variable pitch, I go with Edward Tufte's font:
+If available on the system, I like the "Fira Code" or "Hack" fonts. Otherwise I use "DejaVu". For variable pitch, I go with FiraGo:
 #+begin_src emacs-lisp +n
   (use-package faces
     :custom
     (face-font-family-alternatives
      '(("Fira Code" "Hack" "DejaVu Sans Mono" "courier" "fixed")
-       ("ETBembo" "DejaVu Sans" "CMU Typewriter Text" "Courier 10 Pitch")))
+       ("ETBembo" "FiraGO" "DejaVu Sans" "CMU Typewriter Text" "Courier 10 Pitch")))
     :custom-face
     (default ((t (:family "Fira Code" :height 120))))
     (fixed-pitch ((t (:inherit default))))
-    (variable-pitch ((t (:family "ETBembo" :height 120))))
+    ;; (variable-pitch ((t (:family "ETBembo" :height 120))))
+    (variable-pitch ((t (:family "FiraGO" :height 120))))
     )
-
-  ;; (use-package font-lock
-  ;;   :custom-face
-  ;;   (font-lock-comment-face ((t (:inherit font-lock-comment-face :italic t))))
-  ;;   (font-lock-doc-face ((t (:inherit font-lock-doc-face :italic t))))
-  ;;   (font-lock-string-face ((t (:inherit font-lock-string-face :italic t))))
-  ;;   )
 #+end_src
 
 In Org and LaTeX modes, I like to use variable pitch font. I use mixed-pitch mode to have code blocks, commands, etc. in fixed pitch, as well as a correct indentation:
@@ -87,7 +81,7 @@ In Org and LaTeX modes, I like to use variable pitch font. I use mixed-pitch mod
     (org-mode . mixed-pitch-mode)
     (LaTeX-mode . mixed-pitch-mode)
     :custom (mixed-pitch-set-height t)
-    :config (set-face-attribute 'variable-pitch nil :height 1.3))
+    :config (set-face-attribute 'variable-pitch nil :height 1.0))
 #+end_src
 
 Fira Code supports some ligatures, which I really enjoy in programming modes (FIXME: currently broken for Python)
