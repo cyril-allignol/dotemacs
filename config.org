@@ -120,8 +120,19 @@ Fira Code supports some ligatures, which I really enjoy in programming modes (FI
 * Other configuration files
 
 I have some machine-local configurations in =local.el= (loaded from =init.el=), private non-sensitive information in =private.el= and authentication information in the encrypted =~/.authinfo.gpg= (this is the default):
+I use fancy icons in several places (modeline, Ivy, Org bullets, etc.).
 #+begin_src emacs-lisp +n
   (load "~/.emacs.d/private")
+  (use-package all-the-icons
+    :ensure t
+    :config
+    (set-fontset-font t 'unicode (font-spec :family "all-the-icons") nil 'append)
+    (set-fontset-font t 'unicode (font-spec :family "file-icons") nil 'append)
+    (set-fontset-font t 'unicode (font-spec :family "github-octicons") nil 'append)
+    (set-fontset-font t 'unicode (font-spec :family "FontAwesome") nil 'append)
+    (set-fontset-font t 'unicode (font-spec :family "Weather Icons") nil 'append)
+    (set-fontset-font t 'unicode (font-spec :family "Material Icons") nil 'append)
+    )
 #+end_src
 
 * Package management
