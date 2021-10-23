@@ -1005,6 +1005,7 @@ I sometimes like to open PDFs directly in emacs, which I do with PDF-tools:
     (mu4e-hide-index-messages t "Don't show update message in minibuffer")
     (mu4e-use-fancy-chars t)
     (mu4e-view-show-images t)
+    (mu4e-compose-in-new-frame t)
     (mu4e-maildir "~/.mail" "Home for my mail")
     (mu4e-get-mail-command "mbsync -a" "Sync mail with isync")
     (mu4e-update-interval 300 "Sync interval (seconds)")
