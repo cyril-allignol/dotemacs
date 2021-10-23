@@ -467,6 +467,21 @@ In some occasions, like refactoring, having multiple cursors visually helps:
     )
 #+end_src
 
+** Snippets
+
+Quickly get the boiler-plate code by using code snippets:
+#+begin_src emacs-lisp +n
+  (use-package yasnippet
+    :ensure t
+    :hook ((prog-mode  . yas-minor-mode)
+           (org-mode   . yas-minor-mode)
+           (latex-mode . yas-minor-mode))
+    :config
+    (use-package yasnippet-snippets :ensure t)
+    (yas-reload-all)
+    )
+#+end_src
+
 * Org
 Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]].
 #+begin_src emacs-lisp +n
