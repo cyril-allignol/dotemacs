@@ -693,6 +693,8 @@ I use Magit for version control management with diff-hl as a diff tool:
     :ensure t
     :bind ("C-x g" . magit-status))
 
+  (use-package magit-todos :ensure t)
+
   (use-package diff-hl
     :ensure t
     :hook
