@@ -664,6 +664,15 @@ Prettier tags:
 #+end_src
 
 * Programming
+
+Show hidden symbols under cursor:
+#+begin_src emacs-lisp +n
+  (use-package prog-mode
+    :custom
+    (prettify-symbols-unprettify-at-point 'right-edge)
+    )
+#+end_src
+
 ** Compilation
 Automatically: kill existing compilation process, save buffers, jump to first error
 #+begin_src emacs-lisp +n
