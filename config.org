@@ -981,6 +981,7 @@ I sometimes like to open PDFs directly in emacs, which I do with PDF-tools:
 
 * Mail
 
+Composing using message mode:
 #+begin_src emacs-lisp +n
   (use-package message
     :custom
@@ -988,7 +989,10 @@ I sometimes like to open PDFs directly in emacs, which I do with PDF-tools:
     (message-send-mail-function 'sendmail-send-it "Send using the sendmail-program")
     (message-sendmail-envelope-from 'header "Select right sender from context")
     )
+#+end_src
 
+Sending with sendmail:
+#+begin_src emacs-lisp +n
   (use-package smtpmail)
 
   (use-package sendmail
@@ -996,7 +1000,10 @@ I sometimes like to open PDFs directly in emacs, which I do with PDF-tools:
     (sendmail-program "msmtp" "Send using msmtp")
     (send-mail-function 'sendmail-send-it "Send using the sendmail-program")
     )
+#+end_src
 
+Main mu4e configuration:
+#+begin_src emacs-lisp +n
   (use-package mu4e
     :hook
     (mu4e-view-mode . visual-line-mode)
@@ -1027,9 +1034,12 @@ I sometimes like to open PDFs directly in emacs, which I do with PDF-tools:
     :config
     (setq mu4e-main-buffer-name "Mail"
           mu4e-main-buffer-hide-personal-addresses t)
+#+end_src
 
     )
 
+Display unread messages in the modeline:
+#+begin_src emacs-lisp +n
   (use-package mu4e-alert
     :ensure t
     :init
