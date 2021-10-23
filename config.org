@@ -998,6 +998,8 @@ I sometimes like to open PDFs directly in emacs, which I do with PDF-tools:
     )
 
   (use-package mu4e
+    :hook
+    (mu4e-view-mode . visual-line-mode)
     :bind
     ([f4] . mu4e)
     ("C-x m" . mu4e-compose-new)
