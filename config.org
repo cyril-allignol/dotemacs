@@ -186,7 +186,6 @@ toggle between light and dark in a keystroke:
 #+begin_src emacs-lisp +n
   (use-package doom-themes
     :ensure t
-    :bind ([f10] . my/toggle-theme)
     :custom
     (doom-themes-enable-bold t)
     (doom-themes-enable-italic t)
@@ -202,34 +201,16 @@ toggle between light and dark in a keystroke:
                         org-quote))
           (set-face-attribute face nil :extend t))))
     :init
-    ;; Theme cycling taken from:
-    ;; https://github.com/habamax/.emacs.d/blob/master/lisp/haba-appearance.el
     (defvar *my-theme-light* 'doom-tomorrow-day)
     (defvar *my-theme-dark* 'doom-vibrant)
-    (defvar *my-current-theme* *my-theme-dark*)
     (load-theme *my-theme-dark*)
-    ;; disable other themes before loading new one
-    (defadvice load-theme (before theme-dont-propagate activate)
-      "Disable theme before loading new one."
-      (mapc #'disable-theme custom-enabled-themes))
-    (defun my/next-theme (theme)
-      (if (eq theme 'default)
-          (disable-theme *my-current-theme*)
-        (progn
-          (load-theme theme t)))
-      (setq *my-current-theme* theme))
-    (defun my/toggle-theme ()
-      (interactive)
-      (cond
-       ((eq *my-current-theme* *my-theme-dark*) (my/next-theme *my-theme-light*))
-       ((eq *my-current-theme* *my-theme-light*) (my/next-theme *my-theme-dark*))))
     )
 #+end_src
 
 ** Modeline
-To get along the theme, I use the doom modeline with fancy icons:
+
+To get along the theme, I use the Doom modeline with fancy icons:
 #+begin_src emacs-lisp +n
-  (use-package all-the-icons :ensure t)
   (use-package doom-modeline
     :ensure t
     :custom
