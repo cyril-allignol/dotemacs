@@ -644,6 +644,22 @@ Any marking that is masked re-appears when under the cursor:
     )
 #+end_src
 
+Prettier tags:
+#+begin_src emacs-lisp +n
+  (use-package org-pretty-tags
+    :ensure t
+    :custom
+    (org-pretty-tags-surrogate-strings
+     '(("audio" . "") ("music" . "") ("video" . "") ("book" . "")
+       ("teaching" . "") ("research" . "") ("code" . "")
+       ("email" . "") ("message" . "")
+       ("car" . "") ("bike" . "")
+       ("finances" . "") ("shopping" . "") ("travel" . "")
+       ("urgent" . "")
+       )
+     )
+    :config
+    (org-pretty-tags-global-mode t)
     )
 #+end_src
 
