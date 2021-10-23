@@ -10,6 +10,7 @@ This section configures Emacs' built-in features:
 5. set frames and buffers to be 80 characters wide
 6. don't ask for confirmation when killing current buffer, unless there are changes
 and general key-bindings:
+- =[escape]= escapes all
 - map =[f1]= and =[f2]= to go to column/line
 - map =[²]= completion /via/ dabbrev
 #+begin_src emacs-lisp +n
@@ -19,6 +20,7 @@ and general key-bindings:
     ([f2] . goto-line)
     ([?²] . dabbrev-expand)
     ("C-x k" . (lambda () (interactive) (kill-buffer (current-buffer))))
+    ([escape] . keyboard-escape-quit)
     :custom
     (load-path (cons "~/.emacs.d/lisp" load-path) "Path for local packages")
     (load-prefer-newer t)
