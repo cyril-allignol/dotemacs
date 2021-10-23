@@ -859,8 +859,23 @@ Here I just set-up the interpreter to be Python 3 (not necessary on most recent 
 ** BNF
 #+begin_src emacs-lisp +n
   (use-package bnf-mode
+** Emacs Lisp
+
+Better help for elisp:
+#+begin_src emacs-lisp +n
+  (use-package helpful
     :ensure t
     :mode "\\.bnf\\'")
+    :bind
+    ([remap describe-function] . helpful-function)
+    ([remap describe-symbol]   . helpful-symbol)
+    ([remap describe-variable] . helpful-variable)
+    ([remap describe-command]  . helpful-command)
+    ([remap describe-key]      . helpful-key)
+    :custom
+    (counsel-describe-function-function #'helpful-callable)
+    (counsel-describe-variable-function #'helpful-variable)
+    )
 #+end_src
 
 * Writing
