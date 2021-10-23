@@ -1047,20 +1047,6 @@ Display unread messages in the modeline:
     )
 #+end_src
 
-#+begin_src emacs-lisp +n
-  ;; Yes, you can do this same trick with the cool "It's All Text" firefox add-on :-)
-    (add-to-list 'auto-mode-alist '("/mutt-\\|itsalltext.*mail\\.google" . mail-mode))
-    (add-hook 'mail-mode-hook 'turn-on-auto-fill)
-    (add-hook
-     'mail-mode-hook
-     (lambda ()
-       (define-key mail-mode-map [(control c) (control c)]
-         (lambda ()
-           (interactive)
-           (save-buffer)
-           (server-edit)))))
-#+end_src
-
 * Other specific tools
 ** Passwords
 #+begin_src emacs-lisp +n
