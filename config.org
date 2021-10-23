@@ -1031,9 +1031,12 @@ Main mu4e configuration:
        ("/enac/Sent" . ?s)
        ("/enac/Nicolas Nalpon" . ?n)
        ))
+    (mu4e-compose-signature-auto-include nil "Input signature on demand only (C-c C-w)")
+    (mu4e-context-policy 'pick-first "Choose the first defined context as default")
+    (mu4e-confirm-quit nil "Quit mu4e without asking for confirmation")
     :config
-    (setq mu4e-main-buffer-name "Mail"
-          mu4e-main-buffer-hide-personal-addresses t)
+    (setq mu4e-main-buffer-name "*Mail*")
+    )
 #+end_src
 
 Make the header view fancier:
