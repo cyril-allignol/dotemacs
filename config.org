@@ -113,12 +113,8 @@ Fira Code supports some ligatures, which I really enjoy in programming modes (FI
     )
 #+end_src
 
-* Other configuration files
-
-I have some machine-local configurations in =local.el= (loaded from =init.el=), private non-sensitive information in =private.el= and authentication information in the encrypted =~/.authinfo.gpg= (this is the default):
 I use fancy icons in several places (modeline, Ivy, Org bullets, etc.).
 #+begin_src emacs-lisp +n
-  (load "~/.emacs.d/private")
   (use-package all-the-icons
     :ensure t
     :config
@@ -1140,3 +1136,12 @@ The following functions handle DOS-style end of lines:
       (while (search-forward "\n" nil t)
         (replace-match "\r\n"))))
 #+end_src
+
+* Other configuration files
+
+I have some machine-local configurations in =local.el= (loaded from =init.el=), private non-sensitive information in =private.el= and authentication information in the encrypted =~/.authinfo.gpg= (this is the default, so no setup for that one):
+#+begin_src emacs-lisp +n
+  (load "~/.emacs.d/private")
+#+end_src
+
+# the end
