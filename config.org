@@ -193,6 +193,14 @@ toggle between light and dark in a keystroke:
     :config
     (doom-themes-neotree-config)
     (doom-themes-org-config)
+    (when (>= emacs-major-version 27)
+      (with-eval-after-load 'org
+        (dolist (face '(org-block
+                        org-block-begin-line
+                        org-block-end-line
+                        org-level-1
+                        org-quote))
+          (set-face-attribute face nil :extend t))))
     :init
     ;; Theme cycling taken from:
     ;; https://github.com/habamax/.emacs.d/blob/master/lisp/haba-appearance.el
