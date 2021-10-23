@@ -294,41 +294,50 @@ I want to ignore case in the mini-buffer for filename completion:
     (read-file-name-completion-ignore-case t)
     )
 #+end_src
-I use Helm for "smart" command completion:
+
+Replace usual commands by Ivy/Counsel/Swiper to have better, fuzzy completion:
 #+begin_src emacs-lisp +n
-  (use-package helm-config
-    :ensure helm
+  (use-package ivy
+    :ensure t
     :bind
-    (("C-c h" . helm-command-prefix)
-     ("M-x" . helm-M-x)
-     ("M-y" . helm-show-kill-ring)
-     ("C-x b" . helm-mini)
-     ("C-x C-b" . helm-buffer-list)
-     ("C-x C-f" . helm-find-files)
-     ;; ("C-x 5 f" . helm-find-files)
-     :map helm-map
-     ([tab] . helm-execute-persistent-action)
-     ("C-z" . helm-select-action))
+    ("C-s" . swiper)
     :custom
-    (helm-split-window-inside-p t)
-    ;; (helm-move-to-line-cycle-in-source t)
-    (helm-ff-search-library-in-sexp t)
-    (helm-ff-file-name-history-use-recentf t)
-    (helm-ff-skip-boring-files t)
-    (helm-scroll-amount 8)
-    (helm-echo-input-in-header-line t)
-    (helm-autoresize-max-height 0)
-    (helm-autoresize-min-height 20)
+    (ivy-use-virtual-buffers t)
+    (ivy-height 20)
+    (ivy-count-format "")
+    (ivy-initial-inputs-alist nil)
+    (ivy-extra-directories nil)
     :config
-    (global-unset-key (kbd "C-x c"))
-    (helm-autoresize-mode 1)
-    (helm-mode 1)
+    (ivy-mode 1)
+    (counsel-mode 1)
+    (setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+    )
+#+end_src
+
+Also drop-in some fancy icons whenever possible...
+#+begin_src emacs-lisp +n
+  (use-package all-the-icons-ivy
+    :ensure t
+    :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
+    )
+#+end_src
+
+Making Ivy lists a bit more informative:
+#+begin_src emacs-lisp +n
+  (use-package ivy-rich
+    :ensure t
+    :after (ivy counsel)
+    :custom
+    (ivy-rich-path-style 'abbrev)
+    :config
+    (ivy-rich-project-root-cache-mode 1)
+    (ivy-rich-mode 1)
     )
 
-  (use-package helm-icons
+  (use-package all-the-icons-ivy-rich
     :ensure t
-    :custom (helm-icons-provider 'all-the-icons)
-    :config (helm-icons-enable)
+    :after (ivy-rich)
+    :config (all-the-icons-ivy-rich-mode 1)
     )
 #+end_src
 
