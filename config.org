@@ -153,9 +153,12 @@ Use =paradox= instead of the default package management interface:
 #+end_src
 
 * Aesthetics
+** Layout
 
-** Spaaaace
-Push the walls:
+Cleaner frames by:
+- removing menu bar and tool bar;
+- removing visual scroll bar;
+Also, I don't need the tooltips, so let's remove them as well.
 #+begin_src emacs-lisp +n
   (use-package menu-bar :custom (menu-bar-mode nil))
   (use-package tool-bar :custom (tool-bar-mode nil))
