@@ -482,6 +482,24 @@ Quickly get the boiler-plate code by using code snippets:
     )
 #+end_src
 
+** Pop-up shell
+
+=[C--t]= toggles a true terminal in a pop-up window below:
+#+begin_src emacs-lisp +n
+  (use-package shell-pop
+    :ensure t
+    :custom
+    (shell-pop-universal-key "C-s-t")
+    (shell-pop-shell-type
+     (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))))
+    (shell-pop-term-shell "/bin/bash")
+    (shell-pop-window-size 30)
+    (shell-pop-full-span t)
+    (shell-pop-position "bottom")
+    (shell-pop-autocd-to-working-dir t)
+    )
+#+end_src
+
 * Org
 Capture templates are from [[http://doc.norang.ca/org-mode.html#OrgFiles][here]].
 #+begin_src emacs-lisp +n
