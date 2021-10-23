@@ -631,6 +631,19 @@ Prettify todo bullets and remove heading stars:
     )
 #+end_src
 
+Any marking that is masked re-appears when under the cursor:
+#+begin_src emacs-lisp +n
+  (use-package org-appear
+    :ensure t
+    :hook (org-mode . org-appear-mode)
+    :custom
+    (org-appear-autolinks t)
+    (org-appear-autosubmarkers t)
+    (org-appear-autoentities t)
+    (org-appear-autokeywords t)
+    )
+#+end_src
+
     )
 #+end_src
 
