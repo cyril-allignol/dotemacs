@@ -779,7 +779,9 @@ For OCaml, I use a combination of Tuareg, Merlin (with company) and utop. All of
     :init
     (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
     (setq utop-command "opam config exec -- utop -emacs"))
+#+end_src
 
+#+begin_src emacs-lisp +n
   (use-package tuareg
     :ensure t
     :mode
@@ -797,13 +799,15 @@ For OCaml, I use a combination of Tuareg, Merlin (with company) and utop. All of
     (setq exec-path (split-string (getenv "PATH") path-separator))
     (push (concat (getenv "OCAML_TOPLEVEL_PATH")
                   "/../../share/emacs/site-lisp") load-path)
-    (dolist (ext '(".cmo" ".cmx" ".cma" ".cmxa" ".cmi" ".cmt" ".cmti" ".cmxs"
-                   ".annot" ".depends"))
+    (dolist (ext '(".cmo" ".cmx" ".cma" ".cmxa" ".cmi" ".cmt" ".cmti"
+                   ".cmxs" ".annot" ".depends"))
       (add-to-list 'completion-ignored-extensions ext))
     ;; :config
     ;; (setq tuareg-prettify-symbol-mode t)
     )
+#+end_src
 
+#+begin_src emacs-lisp +n
   (use-package dune
     :ensure t
     :mode ("dune\\'" . dune-mode))
