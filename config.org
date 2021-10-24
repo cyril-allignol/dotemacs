@@ -83,31 +83,33 @@ In Org and LaTeX modes, I like to use variable pitch font. I use mixed-pitch mod
     :config (set-face-attribute 'variable-pitch nil :height 1.0))
 #+end_src
 
-Fira Code supports some ligatures, which I really enjoy in programming modes (FIXME: currently broken for Python)
+Fira Code supports some ligatures, which I really enjoy in programming modes:
 #+begin_src emacs-lisp
   (use-package ligature
     :config
-    (ligature-set-ligatures 't '("www"))
-    (ligature-set-ligatures 'text-mode '("ff" "fi" "ffi"))
     (ligature-set-ligatures
-     '(prog-mode org-mode coq-mode)
-     ;; '(org-mode coq-mode)
-     '("**/" "\\\\\\" "{-" "-}" "----"
-       "|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+     't
+     '("www"
+       "0xA" "0xB" "0xC" "0xD" "0xE" "0xF"
+       "0x0" "0x1" "0x2" "0x3" "0x4" "0x5" "0x6" "0x7" "0x8" "0x9"))
+    (ligature-set-ligatures 'text-mode '("ff" "fi" "ffi" "..."))
+    (ligature-set-ligatures
+     'prog-mode
+     '("**/" "\\\\\\" "{-" "-}" "----" "\\\\" "://"
+       "<|||" "|||>" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
        ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
        "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
        "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
        "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-       "..." "+++" "/==" "///" "_|_" "&&" "^=" "~~" "~@" "~="
-       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+       "&&" "^=" "~~" "~@" "~=" "_|_" "///" "/==" "+++"
+       "||" "|}" "|]" "|=" "|>" "|-" "{|" "**" "*>" "*/" "~-" "~>"
        "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
-       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+       "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:" ">-" ">>" ">="
        "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
-       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
-       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
-       "0xA" "0xB" "0xC" "0xD" "0xE" "0xF" "0x0" "0x1" "0x2"
-       "0x3" "0x4" "0x5" "0x6" "0x7" "0x8" "0x9"
-       "\\\\" "://"))
+       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".?" "+>" "++" "?:"
+       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "(*" "*)"
+       ;; ".." "..." those break python-mode as of emacs 27.1
+       ))
     (global-ligature-mode t)
     )
 #+end_src
