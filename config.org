@@ -480,6 +480,10 @@ Set up dired to be used as a file chooser for e-mail attachments:
     :config
     (bind-key "<tab>" #'dired-subtree-toggle dired-mode-map)
     (bind-key "<backtab>" #'dired-subtree-cycle dired-mode-map))
+
+  (use-package all-the-icons-dired
+    :ensure t
+    :hook (dired-mode . all-the-icons-dired-mode))
 #+end_src
 
 ** Cursors
