@@ -286,6 +286,13 @@ Making it easier to discover Emacs key presses.
     )
 #+end_src
 
+** Buffers
+
+Handling buffer list with iBuffer (built-in):
+#+begin_src emacs-lisp
+  (use-package ibuffer :bind ("C-x C-b" . ibuffer))
+#+end_src
+
 ** Mini-buffer
 
 I want to ignore case in the mini-buffer for filename completion (this might become obsolete with the use of Ivy):
