@@ -330,6 +330,14 @@ Also drop-in some fancy icons whenever possible...
     )
 #+end_src
 
+Better sorting for Ivy:
+#+begin_src emacs-lisp
+  (use-package ivy-prescient
+    :ensure t
+    :after (ivy counsel)
+    :config (ivy-prescient-mode))
+#+end_src
+
 Making Ivy lists a bit more informative:
 #+begin_src emacs-lisp
   (use-package ivy-rich
