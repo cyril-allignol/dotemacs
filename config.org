@@ -468,8 +468,10 @@ Now and then, it is useful to navigate files in a directory tree. I do this with
 
 Set up dired to be used as a file chooser for e-mail attachments:
 #+begin_src emacs-lisp
-  (use-package dired
+  (use-package dired-x
     :hook (dired-mode . turn-on-gnus-dired-mode)
+    :bind
+    ("C-x C-j" . dired-jump)
     )
 #+end_src
 
