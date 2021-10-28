@@ -308,7 +308,7 @@ Replace usual commands by Ivy/Counsel/Swiper to have better, fuzzy completion:
   (use-package ivy
     :ensure t
     :bind
-    ("C-s" . swiper)
+    ("C-s" . swiper-isearch)
     :custom
     (ivy-use-virtual-buffers t)
     (ivy-height 20)
