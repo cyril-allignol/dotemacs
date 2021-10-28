@@ -392,10 +392,16 @@ The Crux package provides some useful functions for line, buffer of file manipul
 
 ** Window navigation
 
-Move around with M-<up>, M-<down>, M-<left> and M-<right>, using windmove (this does not work in Org mode since those keybindings are used to move sections around):
+Move around with =C--[ijkl]=, using windmove:
 #+begin_src emacs-lisp
   (use-package windmove
-    :config (windmove-default-keybindings 'meta)
+    :bind
+    ("C-s-i" . 'windmove-up)
+    ("C-s-k" . 'windmove-down)
+    ("C-s-j" . 'windmove-left)
+    ("C-s-l" . 'windmove-right)
+    :custom
+    (windmove-create-window t)
     )
 #+end_src
 
