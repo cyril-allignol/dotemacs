@@ -991,6 +991,48 @@ I also use RefTeX for references management:
     )
 #+end_src
 
+** Bibliography
+
+This section sets up access to references using BibTeX-related tools.
+
+Use biblatex entry styles:
+#+begin_src emacs-lisp
+  (use-package bibtex
+    :custom
+    (bibtex-dialect 'biblatex)
+    )
+#+end_src
+
+Browse default path with Ivy:
+#+begin_src emacs-lisp
+  (use-package ivy-bibtex
+    :ensure t
+    ;; :init (setq-default tab-width 3)
+    :custom
+    (bibtex-completion-bibliography '("~/biblio/own.bib"
+                                      "~/biblio/languages.bib"
+                                      "~/biblio/compilation.bib"
+                                      "~/biblio/computability.bib"
+                                      ))
+    (bibtex-completion-library-path '("~/biblio/pdfs"))
+    (bibtex-completion-notes-path     "~/biblio/notes")
+    (bibtex-completion-display-formats
+     '((article       . "${=has-pdf=:1}${=has-note=:1}\t \t${year:4} ${author:36} ${title:*} ${journaltitle:40}")
+       (inbook        . "${=has-pdf=:1}${=has-note=:1}\t \t${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
+       (incollection  . "${=has-pdf=:1}${=has-note=:1}\t \t${year:4} ${author:36} ${title:*} ${booktitle:40}")
+       (inproceedings . "${=has-pdf=:1}${=has-note=:1}\t \t${year:4} ${author:36} ${title:*} ${eventtitle:12} ${booktitle:27}")
+       (book          . "${=has-pdf=:1}${=has-note=:1}\t \t${year:4} ${author:36} ${title:*}")
+       (thesis        . "${=has-pdf=:1}${=has-note=:1}\t\t${year:4} ${author:36} ${title:*}")
+       (manual        . "${=has-pdf=:1}${=has-note=:1}\t \t${year:4} ${author:36} ${title:*}")
+       (report        . "${=has-pdf=:1}${=has-note=:1}\t \t${year:4} ${author:36} ${title:*}")
+       (online        . "${=has-pdf=:1}${=has-note=:1}\t \t${year:4} ${author:36} ${title:*}")
+       (t             . "${=has-pdf=:1}${=has-note=:1}\t${=type=:1} \t${year:4} ${author:36} ${title:*}")))
+    (bibtex-completion-additional-search-fields '(keywords journal journaltitle eventtitle booktitle))
+    (bibtex-completion-pdf-symbol   "")
+    (bibtex-completion-notes-symbol "")
+    )
+#+end_src
+
 ** Watch your language!
 
 I use =aspell= for spelling:
