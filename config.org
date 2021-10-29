@@ -353,6 +353,10 @@ Making Ivy lists a bit more informative:
   (use-package all-the-icons-ivy-rich
     :ensure t
     :after (ivy-rich)
+    :custom
+    (all-the-icons-ivy-rich-icon t)
+    (all-the-icons-ivy-rich-color-icon t)
+    (all-the-icons-ivy-rich-project t)
     :config (all-the-icons-ivy-rich-mode 1)
     )
 #+end_src
